@@ -89,6 +89,28 @@ local line = landed and vim.api.nvim_get_current_line() or ""
 check("gd includesub: fichero hoja", landed)
 check("gd includesub: linea del startsub", line:find("!startsub Cafetera") ~= nil, line)
 
+-- ── 3b. gd sobre ENTIDADES: tipo en un miembro y relacion cualificada
+open("clases/CL_Cafetera.puml")
+vim.api.nvim_win_set_cursor(0, { 11, 23 }) -- ...pedido: Pedido) : Taza
+vim.lsp.buf.definition()
+local to_pedido = vim.wait(6000, function()
+  return vim.api.nvim_buf_get_name(0):find("CL_Pedido%.puml") ~= nil
+end, 100)
+check("gd entidad: tipo de parametro -> CL_Pedido", to_pedido,
+  vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t"))
+check("gd entidad: aterriza en la clase",
+  to_pedido and vim.api.nvim_get_current_line():find("class Pedido") ~= nil,
+  vim.api.nvim_get_current_line())
+
+open("clases/CL_Sistema.puml")
+vim.api.nvim_win_set_cursor(0, { 20, 10 }) -- pedidos.Pedido --> ...
+vim.lsp.buf.definition()
+local to_pedido2 = vim.wait(6000, function()
+  return vim.api.nvim_buf_get_name(0):find("CL_Pedido%.puml") ~= nil
+end, 100)
+check("gd entidad: relacion cualificada -> CL_Pedido", to_pedido2,
+  vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t"))
+
 -- ── 4. Diagnosticos: los defectos intencionados, por severidad ──────
 local lints_buf = open("extra/LINTS_Demo.puml")
 local counted = vim.wait(8000, function()
