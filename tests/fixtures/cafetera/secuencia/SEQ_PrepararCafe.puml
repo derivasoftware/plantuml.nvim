@@ -16,7 +16,7 @@ Cafetera -> Cafetera : calentar(92.0)
 alt hay agua
   Cafetera -> Deposito : nivel()
   Deposito --> Cafetera : 0.8
-  Cafetera -> Molinillo : moler(18)
+  Cafetera -> Molinillo : moler(num_granos)
   Molinillo --> Cafetera : cafe
 else deposito vacio
   Cafetera --> Barista : error("rellena el deposito")
