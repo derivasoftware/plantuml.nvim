@@ -158,6 +158,57 @@ local unknown_call = vim.wait(8000, function()
 end, 200)
 check("lint llamada: error() sin declaracion global (Information)", unknown_call)
 
+-- ── 3d. Actividad enlazada: acciones → métodos, carriles → clases
+local act_buf = open("actividad/ACT_CicloLimpieza.puml")
+-- gd sobre :calentar(objetivo); bajo el carril |Cafetera|
+vim.api.nvim_win_set_cursor(0, { 10, 5 })
+vim.lsp.buf.definition()
+local to_calentar = vim.wait(6000, function()
+  return vim.api.nvim_buf_get_name(0):find("CL_Cafetera%.puml") ~= nil
+end, 100)
+check("gd accion: calentar -> CL_Cafetera", to_calentar,
+  vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t"))
+check("gd accion: aterriza en el miembro",
+  to_calentar and vim.api.nvim_get_current_line():find("calentar%(objetivo") ~= nil,
+  vim.api.nvim_get_current_line())
+
+open("actividad/ACT_CicloLimpieza.puml")
+local act_hover = press_K_at(10, 5)
+check("K accion: firma declarada",
+  act_hover ~= nil and act_hover:find("objetivo: float", 1, true) ~= nil,
+  act_hover and act_hover:sub(1, 60) or "sin float")
+
+-- carril |Cafetera| correlaciona con la clase
+open("actividad/ACT_CicloLimpieza.puml")
+local lane_hover = press_K_at(8, 2)
+check("K carril: ficha de la clase",
+  lane_hover ~= nil and lane_hover:find("preparar", 1, true) ~= nil,
+  lane_hover and lane_hover:sub(1, 60) or "sin float")
+
+-- deriva: afilar(disco) bajo |Molinillo| que no lo declara
+local act_drift = vim.wait(8000, function()
+  for _, d in ipairs(vim.diagnostic.get(act_buf)) do
+    if d.message:find("afilar") then return true end
+  end
+  return false
+end, 200)
+check("lint accion: afilar bajo Molinillo avisa", act_drift)
+
+-- references del metodo moler: declaracion + SEQ + ACT
+open("clases/CL_Molinillo.puml")
+vim.api.nvim_win_set_cursor(0, { 8, 6 }) -- +moler(gramos: int)
+vim.fn.setqflist({})
+vim.lsp.buf.references()
+vim.wait(6000, function() return #vim.fn.getqflist() > 1 end, 100)
+local ref_files = {}
+for _, item in ipairs(vim.fn.getqflist()) do
+  ref_files[vim.fn.fnamemodify(vim.fn.bufname(item.bufnr), ":t")] = true
+end
+check("references metodo: incluye la secuencia",
+  ref_files["SEQ_PrepararCafe.puml"] == true, vim.inspect(ref_files))
+check("references metodo: incluye la actividad",
+  ref_files["ACT_CicloLimpieza.puml"] == true, vim.inspect(ref_files))
+
 -- ── 4. Diagnosticos: los defectos intencionados, por severidad ──────
 local lints_buf = open("extra/LINTS_Demo.puml")
 local counted = vim.wait(8000, function()

@@ -5,8 +5,10 @@
 
 start
 :encender la cafetera;
+|Cafetera|
 if (deposito lleno?) then (si)
-  :calentar a 95 grados;
+  :calentar(objetivo);
+  :limpiar();
 else (no)
   :pedir rellenado;
   stop
@@ -20,7 +22,9 @@ repeat while (agua sale turbia?)
 fork
   :purgar vaporizador;
 fork again
-  :limpiar molinillo;
+  |Molinillo|
+  :moler(granos_de_prueba);
+  :afilar(disco);
 end fork
 
 |Barista|
