@@ -245,14 +245,14 @@ check("completion tras flecha: participantes sin keywords",
 -- ── 4. Diagnosticos: los defectos intencionados, por severidad ──────
 local lints_buf = open("extra/LINTS_Demo.puml")
 local counted = vim.wait(8000, function()
-  return #vim.diagnostic.get(lints_buf) >= 4
+  return #vim.diagnostic.get(lints_buf) >= 5
 end, 200)
 local sev = { 0, 0, 0, 0 }
 for _, d in ipairs(vim.diagnostic.get(lints_buf)) do
   sev[d.severity] = sev[d.severity] + 1
 end
 check("lints: llegan", counted)
-check("lints: 2 errores", sev[vim.diagnostic.severity.ERROR] == 2,
+check("lints: 3 errores", sev[vim.diagnostic.severity.ERROR] == 3,
   "errores=" .. sev[vim.diagnostic.severity.ERROR])
 check("lints: 2 warnings", sev[vim.diagnostic.severity.WARN] == 2,
   "warnings=" .. sev[vim.diagnostic.severity.WARN])
@@ -264,6 +264,70 @@ local drift = vim.wait(8000, function()
   return false
 end, 200)
 check("lints: deriva de Duende en el SEQ", drift)
+
+-- ── 4b. Code actions: quick fixes sobre los lints
+local function actions_at(buf, row)
+  local client = vim.lsp.get_clients({ bufnr = buf, name = "plantuml_lsp" })[1]
+  local diags = {}
+  for _, d in ipairs(vim.diagnostic.get(buf, { lnum = row })) do
+    table.insert(diags, {
+      range = { start = { line = d.lnum, character = d.col },
+                ["end"] = { line = d.end_lnum or d.lnum, character = d.end_col or d.col } },
+      message = d.message, severity = d.severity,
+    })
+  end
+  local done, result = false, nil
+  client:request("textDocument/codeAction", {
+    textDocument = { uri = vim.uri_from_bufnr(buf) },
+    range = { start = { line = row, character = 0 },
+              ["end"] = { line = row, character = 200 } },
+    context = { diagnostics = diags },
+  }, function(_, res) done, result = true, res end)
+  vim.wait(5000, function() return done end, 100)
+  return result or {}
+end
+local function apply_action(actions, pattern)
+  for _, action in ipairs(actions) do
+    if action.title:find(pattern) then
+      vim.lsp.util.apply_workspace_edit(action.edit, "utf-16")
+      return action.title
+    end
+  end
+  return nil
+end
+
+-- crear declaracion para Fantasma (linea 8, 0-based 7)
+local lint_acts = actions_at(lints_buf, 7)
+local created = apply_action(lint_acts, "Fantasma")
+check("action: crear declaracion de Fantasma", created ~= nil,
+  vim.inspect(vim.tbl_map(function(a) return a.title end, lint_acts)))
+local lints_text = table.concat(
+  vim.api.nvim_buf_get_lines(lints_buf, 0, -1, false), "\n")
+check("action: class Fantasma insertada",
+  lints_text:find("class Fantasma") ~= nil)
+
+-- corregir la ruta con typo (CL_Cafetera.pml, linea 17 0-based 16)
+local fix_acts = actions_at(lints_buf, 16)
+local fixed = apply_action(fix_acts, "CL_Cafetera%.puml")
+check("action: corregir ruta del include", fixed ~= nil,
+  vim.inspect(vim.tbl_map(function(a) return a.title end, fix_acts)))
+
+-- declarar afilar() en Molinillo desde la deriva del SEQ
+local deriva_buf2 = open("secuencia/SEQ_Deriva.puml")
+vim.wait(6000, function() return #vim.diagnostic.get(deriva_buf2) > 0 end, 200)
+local drift_row
+for _, d in ipairs(vim.diagnostic.get(deriva_buf2)) do
+  if d.message:find("afilar") then drift_row = d.lnum end
+end
+local drift_acts = actions_at(deriva_buf2, drift_row or 0)
+local declared = apply_action(drift_acts, "afilar")
+check("action: declarar afilar en Molinillo", declared ~= nil,
+  vim.inspect(vim.tbl_map(function(a) return a.title end, drift_acts)))
+local mol_buf = vim.fn.bufnr("CL_Molinillo.puml", false)
+local mol_text = mol_buf > 0 and table.concat(
+  vim.api.nvim_buf_get_lines(mol_buf, 0, -1, false), "\n") or ""
+check("action: miembro afilar en el CL",
+  mol_text:find("afilar%(") ~= nil, mol_text:sub(1, 120))
 
 -- ── 5. References de Cafetera cruzan ficheros ───────────────────────
 open("clases/CL_Cafetera.puml")
