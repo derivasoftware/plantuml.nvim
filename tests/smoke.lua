@@ -41,6 +41,13 @@ check("foldexpr wired", vim.wo.foldmethod == "expr")
 check("preview commands", vim.fn.exists(":PlantumlPreview") == 2
   and vim.fn.exists(":PlantumlPreviewStop") == 2)
 
+-- las teclas del menú son buffer-local y expr (fuera del pum, fallback)
+local has_tab = false
+for _, m in ipairs(vim.api.nvim_buf_get_keymap(0, "i")) do
+  if m.lhs == "<Tab>" and m.expr == 1 then has_tab = true end
+end
+check("pum keys mapeadas (con LSP off no)", not has_tab)
+
 if #failed > 0 then
   print("FAILED: " .. table.concat(failed, ", "))
   vim.cmd("cquit 1")

@@ -13,6 +13,9 @@ M.defaults = {
     enabled = true,
     -- resolved through PATH; point it at a venv binary if you prefer
     cmd = { "plantuml-lsp" },
+    -- Tab/S-Tab cycle and Enter accepts while the menu is open;
+    -- outside the menu the keys keep their normal meaning
+    pum_keys = true,
   },
   folds = true,
   preview = {
@@ -79,6 +82,16 @@ function M.setup(opts)
           vim.bo[event.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
           vim.api.nvim_set_option_value("completeopt",
             "menu,menuone,noselect,popup", { buf = event.buf })
+          if opts.lsp.pum_keys then
+            local map = function(lhs, rhs, fallback)
+              vim.keymap.set("i", lhs, function()
+                return vim.fn.pumvisible() == 1 and rhs or fallback
+              end, { buffer = event.buf, expr = true })
+            end
+            map("<Tab>", "<C-n>", "<Tab>")
+            map("<S-Tab>", "<C-p>", "<S-Tab>")
+            map("<CR>", "<C-y>", "<CR>")
+          end
         end
       end,
     })
