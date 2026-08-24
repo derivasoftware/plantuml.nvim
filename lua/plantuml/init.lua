@@ -64,6 +64,24 @@ function M.setup(opts)
       root_markers = { ".git" },
     })
     vim.lsp.enable("plantuml_lsp")
+
+    -- native autocompletion: without a completion plugin, nothing pops
+    -- unless we enable the 0.11 built-in with autotrigger (fires on
+    -- the server's trigger characters: ':', '>', ' ', '|')
+    vim.api.nvim_create_autocmd("LspAttach", {
+      group = vim.api.nvim_create_augroup("plantuml_lsp_completion", {}),
+      callback = function(event)
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+        if client and client.name == "plantuml_lsp"
+            and vim.lsp.completion ~= nil then
+          vim.lsp.completion.enable(true, client.id, event.buf,
+            { autotrigger = true })
+          vim.bo[event.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+          vim.api.nvim_set_option_value("completeopt",
+            "menu,menuone,noselect,popup", { buf = event.buf })
+        end
+      end,
+    })
   end
 end
 
