@@ -16,7 +16,10 @@ smoke:
   stage: test
   script:
     - export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
-    - git config --global
+    # job-local git config: the shell runner's HOME gitconfig outlives
+    # jobs and can carry rewrites with expired tokens
+    - export GIT_CONFIG_GLOBAL="$CI_PROJECT_DIR/.gitconfig-ci"
+    - git config --file "$GIT_CONFIG_GLOBAL"
       url."https://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_SERVER_HOST}/".insteadOf
       "https://${CI_SERVER_HOST}/"
     - make clean && make
