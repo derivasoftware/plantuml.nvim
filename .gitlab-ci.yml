@@ -1,0 +1,23 @@
+# CI — plantuml.nvim. Build the pinned grammar into the runtimepath and
+# run the headless smoke on the shell runner's Neovim.
+
+include:
+  - project: deriva/infra/ci-templates
+    ref: main
+    file:
+      - /templates/base.yml
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
+
+smoke:
+  stage: test
+  script:
+    - export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
+    - git config --global
+      url."https://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_SERVER_HOST}/".insteadOf
+      "https://${CI_SERVER_HOST}/"
+    - make clean && make
+    - nvim --headless -u tests/minimal_init.lua -l tests/smoke.lua

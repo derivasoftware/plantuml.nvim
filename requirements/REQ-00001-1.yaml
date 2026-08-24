@@ -1,0 +1,16 @@
+requirement:
+  id: REQ-00001-1
+  title: The build shall compile the pinned grammar and copy its queries into the runtimepath
+  description: >
+    The build shall compile the pinned grammar and copy its queries into the runtimepath
+  rationale: >
+    make clones tree-sitter-plantuml at GRAMMAR_TAG, compiles
+    parser/plantuml.so with cc and copies every shipped .scm to
+    queries/plantuml/ — one tag, one source, no drift. Bumping the
+    grammar is editing the tag and rebuilding.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00001-1
+  tags:
+    - build

@@ -1,0 +1,16 @@
+requirement:
+  id: SREQ-00001-1
+  title: The plugin shall bring the PlantUML toolchain to Neovim
+  description: >
+    The plugin shall bring the PlantUML toolchain to Neovim.
+  rationale: >
+    Neovim consumes the family natively — tree-sitter for highlight,
+    folds and indentation, LSP for intelligence — so the plugin is
+    glue, not reimplementation: it builds the pinned grammar, ships
+    its queries and wires plantuml-lsp through the 0.11 native LSP
+    API. Self-sufficient by design: no nvim-treesitter dependency, no
+    drift between parser and queries (both come from one pinned tag).
+  owner: dcoello-dev
+  status: APPROVED
+  asil: QM
+  parent_ids: []

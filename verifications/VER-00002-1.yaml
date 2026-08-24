@@ -1,0 +1,9 @@
+verification:
+  id: VER-00002-1
+  req_id: REQ-00002-1
+  title: The headless smoke proves filetype detection, error-free parsing and fold wiring
+  description: >
+    The headless smoke proves filetype detection, error-free parsing and fold wiring
+  method: test
+  test_ids:
+    - tests/smoke.lua

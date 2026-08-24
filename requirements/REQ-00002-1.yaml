@@ -1,0 +1,17 @@
+requirement:
+  id: REQ-00002-1
+  title: The setup shall wire filetype, native highlighting, folding and the language server
+  description: >
+    The setup shall wire filetype, native highlighting, folding and the language server
+  rationale: >
+    setup() registers the four PlantUML extensions, starts native
+    tree-sitter highlighting per buffer when the parser is built,
+    enables expression folding over the grammar's folds query, and
+    configures plantuml-lsp through vim.lsp.config/enable (0.11+),
+    with the server command overridable to a venv binary.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00001-1
+  tags:
+    - setup
