@@ -161,7 +161,7 @@ check("lint llamada: error() sin declaracion global (Information)", unknown_call
 -- ── 3d. Actividad enlazada: acciones → métodos, carriles → clases
 local act_buf = open("actividad/ACT_CicloLimpieza.puml")
 -- gd sobre :calentar(objetivo); bajo el carril |Cafetera|
-vim.api.nvim_win_set_cursor(0, { 10, 5 })
+vim.api.nvim_win_set_cursor(0, { 13, 5 })
 vim.lsp.buf.definition()
 local to_calentar = vim.wait(6000, function()
   return vim.api.nvim_buf_get_name(0):find("CL_Cafetera%.puml") ~= nil
@@ -173,14 +173,14 @@ check("gd accion: aterriza en el miembro",
   vim.api.nvim_get_current_line())
 
 open("actividad/ACT_CicloLimpieza.puml")
-local act_hover = press_K_at(10, 5)
+local act_hover = press_K_at(13, 5)
 check("K accion: firma declarada",
   act_hover ~= nil and act_hover:find("objetivo: float", 1, true) ~= nil,
   act_hover and act_hover:sub(1, 60) or "sin float")
 
 -- carril |Cafetera| correlaciona con la clase
 open("actividad/ACT_CicloLimpieza.puml")
-local lane_hover = press_K_at(8, 2)
+local lane_hover = press_K_at(11, 2)
 check("K carril: ficha de la clase",
   lane_hover ~= nil and lane_hover:find("preparar", 1, true) ~= nil,
   lane_hover and lane_hover:sub(1, 60) or "sin float")
