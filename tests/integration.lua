@@ -111,6 +111,39 @@ end, 100)
 check("gd entidad: relacion cualificada -> CL_Pedido", to_pedido2,
   vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t"))
 
+-- ── 3c. Nivel de llamada: etiquetas de mensaje ↔ miembros de la clase
+open("secuencia/SEQ_PrepararCafe.puml")
+vim.api.nvim_win_set_cursor(0, { 19, 26 }) -- Cafetera -> Molinillo : moler(num_granos)
+vim.lsp.buf.definition()
+local to_moler = vim.wait(6000, function()
+  return vim.api.nvim_buf_get_name(0):find("CL_Molinillo%.puml") ~= nil
+end, 100)
+check("gd llamada: moler -> CL_Molinillo", to_moler,
+  vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t"))
+check("gd llamada: aterriza en el miembro",
+  to_moler and vim.api.nvim_get_current_line():find("moler%(gramos") ~= nil,
+  vim.api.nvim_get_current_line())
+
+open("secuencia/SEQ_PrepararCafe.puml")
+local call_hover = press_K_at(19, 26)
+check("K llamada: firma declarada",
+  call_hover ~= nil and call_hover:find("gramos: int", 1, true) ~= nil,
+  call_hover and call_hover:sub(1, 60) or "sin float")
+
+local deriva_buf = open("secuencia/SEQ_Deriva.puml")
+local call_drift = vim.wait(8000, function()
+  for _, d in ipairs(vim.diagnostic.get(deriva_buf)) do
+    if d.message:find("afilar") then return true end
+  end
+  return false
+end, 200)
+check("lint llamada: afilar no declarado avisa", call_drift)
+local moler_quiet = true
+for _, d in ipairs(vim.diagnostic.get(deriva_buf)) do
+  if d.message:find("moler") then moler_quiet = false end
+end
+check("lint llamada: moler declarado calla", moler_quiet)
+
 -- ── 4. Diagnosticos: los defectos intencionados, por severidad ──────
 local lints_buf = open("extra/LINTS_Demo.puml")
 local counted = vim.wait(8000, function()

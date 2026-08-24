@@ -1,0 +1,9 @@
+@startuml SEQ_Deriva
+' Deriva comportamiento↔estructura INTENCIONADA: afilar no existe en
+' Molinillo — el lint debe avisar. moler si existe y debe callar.
+participant Cafetera
+participant Molinillo
+
+Cafetera -> Molinillo : moler(num_granos)
+Cafetera -> Molinillo : afilar(disco)
+@enduml
