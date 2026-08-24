@@ -1,12 +1,17 @@
 @startuml ACT_CicloLimpieza
-' Actividad (sintaxis nueva): la gramática la parsea entera sin errores
-' pero deliberadamente en crudo — el preview nativo no la dibuja (la
-' promoción estructural espera consumidor); el motor jar sí.
+' Actividad (sintaxis nueva): acciones y carriles son estructurales —
+' el LSP los enlaza con las clases (gd/K sobre :calentar(objetivo);
+' salta al miembro declarado; el carril |Cafetera| nombra al receptor,
+' y :afilar(disco); bajo |Molinillo| dispara el lint de deriva). El
+' control de flujo sigue en crudo; el preview nativo aún no la dibuja,
+' el motor jar sí.
 
 start
 :encender la cafetera;
+|Cafetera|
 if (deposito lleno?) then (si)
-  :calentar a 95 grados;
+  :calentar(objetivo);
+  :limpiar();
 else (no)
   :pedir rellenado;
   stop
@@ -20,7 +25,9 @@ repeat while (agua sale turbia?)
 fork
   :purgar vaporizador;
 fork again
-  :limpiar molinillo;
+  |Molinillo|
+  :moler(granos_de_prueba);
+  :afilar(disco);
 end fork
 
 |Barista|
