@@ -40,6 +40,11 @@ the build step.
   every tool of the family consumes, raw-frontier included.
 - **Folding** (`zc`/`zo`) on bodies, packages/namespaces, frames and
   notes; **indentation** mirroring the plantuml-fmt canonical style.
+- **Interactive preview** — `:PlantumlPreview` serves the diagram in
+  your browser via `plantuml-render serve`: drag entities and
+  namespaces, filter members/namespaces/notes, pan and zoom, reload on
+  save. `:PlantumlPreviewStop` kills the server. Requires
+  `plantuml-render` ≥ 0.6 on PATH (npm).
 - **LSP**: parse diagnostics with exact ranges, semantic lints
   (unknown endpoints, duplicates, broken includes, participants no
   class explains), completion, hover (participants show the card of

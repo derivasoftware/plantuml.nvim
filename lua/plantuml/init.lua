@@ -15,6 +15,11 @@ M.defaults = {
     cmd = { "plantuml-lsp" },
   },
   folds = true,
+  preview = {
+    -- plantuml-render >= 0.6 (npm); the serve subcommand backs
+    -- :PlantumlPreview
+    cmd = { "plantuml-render" },
+  },
 }
 
 local function plugin_root()
@@ -49,6 +54,8 @@ function M.setup(opts)
       end
     end,
   })
+
+  require("plantuml.preview").setup(opts.preview)
 
   if opts.lsp.enabled and vim.lsp.config ~= nil then
     vim.lsp.config("plantuml_lsp", {

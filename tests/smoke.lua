@@ -38,6 +38,9 @@ end
 
 check("foldexpr wired", vim.wo.foldmethod == "expr")
 
+check("preview commands", vim.fn.exists(":PlantumlPreview") == 2
+  and vim.fn.exists(":PlantumlPreviewStop") == 2)
+
 if #failed > 0 then
   print("FAILED: " .. table.concat(failed, ", "))
   vim.cmd("cquit 1")

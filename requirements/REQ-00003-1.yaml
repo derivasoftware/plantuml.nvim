@@ -1,0 +1,18 @@
+requirement:
+  id: REQ-00003-1
+  title: The PlantumlPreview command shall serve the interactive preview and open the browser
+  description: >
+    The PlantumlPreview command shall serve the interactive preview and open the browser
+  rationale: >
+    :PlantumlPreview writes the buffer if modified, spawns
+    `plantuml-render serve <file>` (command overridable), parses the
+    bound URL from stdout and opens it (wslview, then xdg-open, then
+    open — WSL first-class); the page reloads on save through the
+    server's own directory watch. One server per instance,
+    :PlantumlPreviewStop and VimLeavePre kill it.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00002-1
+  tags:
+    - preview
