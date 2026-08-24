@@ -1,0 +1,15 @@
+@startuml CL_Molinillo
+
+!startsub Molinillo
+
+namespace maquina {
+  class Molinillo {
+    -grosor : int
+    +moler(gramos: int) : Cafe
+    +ajustar(grosor: int) : None
+  }
+}
+
+!endsub
+
+@enduml

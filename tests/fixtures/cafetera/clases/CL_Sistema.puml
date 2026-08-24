@@ -1,0 +1,24 @@
+@startuml CL_Sistema
+' Agregado: compone las hojas con !includesub y añade las relaciones.
+' Prueba aquí: gd sobre un !includesub salta al !startsub de la hoja;
+' K sobre Cafetera enseña miembros y relaciones; F2 renombra en todos.
+
+!includesub ./CL_Cafetera.puml!Cafetera
+!includesub ./CL_Molinillo.puml!Molinillo
+!includesub ./CL_Deposito.puml!Deposito
+!includesub ./CL_Pedido.puml!Pedido
+!includesub ./CL_Estado.puml!Estado
+
+interface Calentable {
+  +calentar(objetivo: float) : None
+}
+
+maquina.Cafetera ..|> Calentable
+maquina.Cafetera *-- maquina.Triturador : muele con
+maquina.Cafetera o-- maquina.Deposito : toma agua de
+maquina.Cafetera --> pedidos.Pedido : prepara
+pedidos.Pedido --> pedidos.Estado : transita
+
+note right of Calentable : todo lo que alcanza\nuna temperatura objetivo
+
+@enduml

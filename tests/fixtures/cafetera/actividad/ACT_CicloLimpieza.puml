@@ -1,0 +1,30 @@
+@startuml ACT_CicloLimpieza
+' Actividad (sintaxis nueva): la gramática la parsea entera sin errores
+' pero deliberadamente en crudo — el preview nativo no la dibuja (la
+' promoción estructural espera consumidor); el motor jar sí.
+
+start
+:encender la cafetera;
+if (deposito lleno?) then (si)
+  :calentar a 95 grados;
+else (no)
+  :pedir rellenado;
+  stop
+endif
+
+repeat
+  :enjuagar circuito;
+  backward:vaciar bandeja;
+repeat while (agua sale turbia?)
+
+fork
+  :purgar vaporizador;
+fork again
+  :limpiar molinillo;
+end fork
+
+|Barista|
+:secar y guardar;
+stop
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml CL_Cafetera
+' La máquina: orquesta molinillo y depósito para servir pedidos.
+
+!startsub Cafetera
+
+namespace maquina {
+  class Cafetera {
+    -temperatura : float
+    -encendida : bool
+    +encender() : None
+    +preparar(pedido: Pedido) : Taza
+    +limpiar() : None
+    -calentar(objetivo: float) : None
+  }
+}
+
+!endsub
+
+@enduml
