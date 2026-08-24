@@ -209,6 +209,39 @@ check("references metodo: incluye la secuencia",
 check("references metodo: incluye la actividad",
   ref_files["ACT_CicloLimpieza.puml"] == true, vim.inspect(ref_files))
 
+-- ── 3e. Completion contextual (peticion LSP real; el menu flotante
+-- de completion no es fiable en headless, el contrato del servidor si)
+local function complete_at(row, col)
+  local buf = vim.api.nvim_get_current_buf()
+  local client = vim.lsp.get_clients({ bufnr = buf, name = "plantuml_lsp" })[1]
+  local done, result = false, nil
+  client:request("textDocument/completion", {
+    textDocument = { uri = vim.uri_from_bufnr(buf) },
+    position = { line = row, character = col },
+  }, function(_, res) done, result = true, res end)
+  vim.wait(5000, function() return done end, 100)
+  local out = {}
+  for _, item in ipairs(result or {}) do out[item.label] = item.detail end
+  return out
+end
+
+open("secuencia/SEQ_PrepararCafe.puml")
+-- linea 19 (0-based 18): "  Cafetera -> Molinillo : moler(num_granos)"
+local after_colon = complete_at(18, 26)
+check("completion tras ':': metodos del receptor",
+  after_colon["moler"] ~= nil and after_colon["ajustar"] ~= nil,
+  vim.inspect(vim.tbl_keys(after_colon)))
+check("completion tras ':': la firma como detalle",
+  after_colon["moler"] and after_colon["moler"]:find("gramos: int") ~= nil,
+  after_colon["moler"])
+check("completion tras ':': sin keywords",
+  after_colon["note"] == nil and after_colon["class"] == nil)
+
+local after_arrow = complete_at(18, 14) -- tras '-> '
+check("completion tras flecha: participantes sin keywords",
+  after_arrow["Molinillo"] ~= nil and after_arrow["note"] == nil,
+  vim.inspect(vim.tbl_keys(after_arrow)))
+
 -- ── 4. Diagnosticos: los defectos intencionados, por severidad ──────
 local lints_buf = open("extra/LINTS_Demo.puml")
 local counted = vim.wait(8000, function()
