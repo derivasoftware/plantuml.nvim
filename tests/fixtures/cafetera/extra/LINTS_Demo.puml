@@ -13,6 +13,9 @@ interface Real
 ' 3. Include roto (Error): el fichero no existe.
 !include ./no-existe.iuml
 
+' 3b. Include con typo (Error): el quick fix sugiere el fichero real.
+!include ../clases/CL_Cafetera.pml
+
 ' 4. Fragmento inexistente (Error): la hoja existe, el sub no.
 !includesub ../clases/CL_Cafetera.puml!NoTalSub
 
