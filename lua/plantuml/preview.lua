@@ -19,7 +19,8 @@ local function browser_open(target)
   return false
 end
 
-function M.start(cmd)
+function M.start(cmd, opts)
+  opts = opts or {}
   local file = vim.api.nvim_buf_get_name(0)
   if not file:match("%.puml$") and not file:match("%.plantuml$")
       and not file:match("%.iuml$") and not file:match("%.wsd$") then
@@ -38,7 +39,9 @@ function M.start(cmd)
           url = found
           vim.schedule(function()
             vim.notify("plantuml: preview en " .. url, vim.log.levels.INFO)
-            browser_open(url)
+            if opts.open ~= false then
+              browser_open(url)
+            end
           end)
         end
       end

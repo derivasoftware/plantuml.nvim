@@ -144,6 +144,20 @@ for _, d in ipairs(vim.diagnostic.get(deriva_buf)) do
 end
 check("lint llamada: moler declarado calla", moler_quiet)
 
+-- error() hacia un actor: ninguna clase del workspace lo declara ->
+-- Information visible sobre la etiqueta
+local tour_buf = open("secuencia/SEQ_PrepararCafe.puml")
+local unknown_call = vim.wait(8000, function()
+  for _, d in ipairs(vim.diagnostic.get(tour_buf)) do
+    if d.message:find("error", 1, true)
+        and d.severity == vim.diagnostic.severity.INFO then
+      return true
+    end
+  end
+  return false
+end, 200)
+check("lint llamada: error() sin declaracion global (Information)", unknown_call)
+
 -- ── 4. Diagnosticos: los defectos intencionados, por severidad ──────
 local lints_buf = open("extra/LINTS_Demo.puml")
 local counted = vim.wait(8000, function()
@@ -201,7 +215,8 @@ if vim.fn.executable("plantuml-render") == 1 then
   open("clases/CL_Sistema.puml")
   local notified
   vim.notify = function(msg) notified = notified or msg end
-  require("plantuml.preview").start({ "plantuml-render" })
+  -- open=false: la suite valida por curl, nunca abre tu navegador
+  require("plantuml.preview").start({ "plantuml-render" }, { open = false })
   vim.wait(10000, function()
     return notified ~= nil and notified:find("http") ~= nil
   end, 200)
