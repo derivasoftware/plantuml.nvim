@@ -65,6 +65,12 @@ end
 -- ── 1. Hover: participant shows the class it plays ──────────────────
 local seq_buf, attached = open("secuencia/SEQ_PrepararCafe.puml")
 check("lsp attaches", attached)
+local seq_client = vim.lsp.get_clients({ bufnr = seq_buf, name = "plantuml_lsp" })[1]
+local trig = vim.tbl_get(seq_client.server_capabilities,
+  "completionProvider", "triggerCharacters") or {}
+check("completion: trigger characters declarados",
+  vim.tbl_contains(trig, ":") and vim.tbl_contains(trig, ">"),
+  vim.inspect(trig))
 
 local hover = press_K_at(7, 15) -- participant Cafetera
 check("K participante: ficha del participante", hover and hover:find("participant"), hover)
