@@ -1,3 +1,4 @@
 build/
 parser/
 queries/plantuml/
+.ci-tools/

@@ -15,7 +15,16 @@ workflow:
 smoke:
   stage: test
   script:
-    - export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
+    # the shell runner has no system nvim: fetch the official tarball
+    # once into the persistent workspace and reuse it across jobs
+    - |
+      if ! command -v nvim >/dev/null 2>&1; then
+        if [ ! -x .ci-tools/nvim-linux-x86_64/bin/nvim ]; then
+          mkdir -p .ci-tools
+          curl -fsSL https://github.com/neovim/neovim/releases/download/v0.11.3/nvim-linux-x86_64.tar.gz | tar -xz -C .ci-tools
+        fi
+        export PATH="$PWD/.ci-tools/nvim-linux-x86_64/bin:$PATH"
+      fi
     # job-local git config: the shell runner's HOME gitconfig outlives
     # jobs and can carry rewrites with expired tokens
     - export GIT_CONFIG_GLOBAL="$CI_PROJECT_DIR/.gitconfig-ci"
