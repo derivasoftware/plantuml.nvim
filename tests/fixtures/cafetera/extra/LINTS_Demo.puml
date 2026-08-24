@@ -1,0 +1,23 @@
+@startuml LINTS_Demo
+' Defectos INTENCIONADOS para ver los lints del LSP (:copen o el
+' virtual text). Cada bloque explica qué debe saltar.
+
+' 1. Endpoint sin declaración en la clausura (Warning): Fantasma no
+'    existe en ningún sitio.
+class Real
+Real --> Fantasma : no existe
+
+' 2. Declaración duplicada (Warning): Real ya era class.
+interface Real
+
+' 3. Include roto (Error): el fichero no existe.
+!include ./no-existe.iuml
+
+' 4. Fragmento inexistente (Error): la hoja existe, el sub no.
+!includesub ../clases/CL_Cafetera.puml!NoTalSub
+
+' 5. Participante con pinta de clase que nada explica (Information):
+'    aparece al abrir junto a un diagrama de secuencia — aquí como
+'    referencia del caso; ver SEQ_PrepararCafe con "participant Duende".
+
+@enduml

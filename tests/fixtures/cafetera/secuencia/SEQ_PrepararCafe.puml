@@ -1,0 +1,34 @@
+@startuml SEQ_PrepararCafe
+' Los participantes son las clases de diagrams/clases: pasa el cursor
+' (K) por Cafetera o Deposito y verás la ficha de la clase — miembros
+' incluidos — aunque esté declarada en otro fichero.
+
+actor Barista
+participant Cafetera
+participant Molinillo
+participant Deposito
+participant Duende
+
+Barista -> Cafetera : preparar(pedido)
+activate Cafetera
+Cafetera -> Cafetera : calentar(92.0)
+
+alt hay agua
+  Cafetera -> Deposito : nivel()
+  Deposito --> Cafetera : 0.8
+  Cafetera -> Molinillo : moler(18)
+  Molinillo --> Cafetera : cafe
+else deposito vacio
+  Cafetera --> Barista : error("rellena el deposito")
+end
+
+== servido ==
+
+loop hasta temperatura
+  Cafetera -> Cafetera : calentar(92.0)
+end
+
+Cafetera -> Barista ++ : taza
+note right of Cafetera : la activacion con ++\nes azucar de secuencia
+
+@enduml

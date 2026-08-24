@@ -1,0 +1,16 @@
+@startuml CL_Estado
+
+!startsub Estado
+
+namespace pedidos {
+  enum Estado {
+    RECIBIDO
+    MOLIENDO
+    SIRVIENDO
+    LISTO
+  }
+}
+
+!endsub
+
+@enduml

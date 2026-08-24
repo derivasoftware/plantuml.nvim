@@ -1,0 +1,16 @@
+@startuml CL_Pedido
+
+!startsub Pedido
+
+namespace pedidos {
+  class Pedido {
+    +tipo : str
+    +doble : bool
+    +estado : Estado
+    +avanzar() : None
+  }
+}
+
+!endsub
+
+@enduml

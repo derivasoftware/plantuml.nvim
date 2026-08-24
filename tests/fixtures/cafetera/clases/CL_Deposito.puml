@@ -1,0 +1,16 @@
+@startuml CL_Deposito
+
+!startsub Deposito
+
+namespace maquina {
+  class Deposito {
+    -litros : float
+    +nivel() : float
+    +rellenar(litros: float) : None
+    +vaciar() : None
+  }
+}
+
+!endsub
+
+@enduml
