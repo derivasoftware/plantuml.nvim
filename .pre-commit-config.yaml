@@ -1,9 +1,22 @@
 repos:
 
-  - repo: https://gitlab.semantiqa.dev/deriva/plantuml/plantuml-fmt
+  - repo: https://github.com/derivasoftware/plantuml-fmt
     rev: v0.3.2
     hooks:
       - id: plantuml-fmt
         # the cafetera fixtures carry deliberate defects and the suites
         # assert hardcoded positions; formatting them would break both
         exclude: '^tests/fixtures/'
+
+  - repo: local
+    hooks:
+      - id: doc-images-tracked
+        name: doc images are tracked in git
+        language: system
+        pass_filenames: false
+        entry: >-
+          bash -c 'missing=$(grep -hoE "assets/[A-Za-z0-9_.-]+\.(svg|png)"
+          doc/*.md 2>/dev/null | sort -u | while read -r a; do git ls-files
+          --error-unmatch "doc/$a" >/dev/null 2>&1 || echo "doc/$a"; done);
+          if [ -n "$missing" ]; then echo "referenced but untracked:";
+          echo "$missing"; exit 1; fi'

@@ -25,12 +25,6 @@ smoke:
         fi
         export PATH="$PWD/.ci-tools/nvim-linux-x86_64/bin:$PATH"
       fi
-    # job-local git config: the shell runner's HOME gitconfig outlives
-    # jobs and can carry rewrites with expired tokens
-    - export GIT_CONFIG_GLOBAL="$CI_PROJECT_DIR/.gitconfig-ci"
-    - git config --file "$GIT_CONFIG_GLOBAL"
-      url."https://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_SERVER_HOST}/".insteadOf
-      "https://${CI_SERVER_HOST}/"
     - make clean && make
     - nvim --headless -u tests/minimal_init.lua -l tests/smoke.lua
     # integration: real keys against the real language server
@@ -40,6 +34,6 @@ smoke:
       fi
     - GIT_CONFIG_GLOBAL="$CI_PROJECT_DIR/.gitconfig-ci"
       .ci-tools/lsp-venv/bin/pip install -q --upgrade
-      "plantuml-lsp @ git+https://${CI_SERVER_HOST}/deriva/plantuml/plantuml-lsp.git@v0.7.1"
+      "plantuml-lsp @ git+https://${CI_SERVER_HOST}/deriva/plantuml/plantuml-lsp.git@v0.7.2"
     - PLANTUML_LSP_BIN="$PWD/.ci-tools/lsp-venv/bin/plantuml-lsp"
       nvim --headless -u tests/minimal_init.lua -l tests/integration.lua

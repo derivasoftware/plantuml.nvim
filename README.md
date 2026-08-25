@@ -6,9 +6,9 @@
 > **plantuml.nvim** is powered by **argos**. **folio** generates this documentation from the repository's model: 3 requirements · 3 verifications · 0 constraints. Quality: 100% verified · 100% tests passing.
 <!-- /folio -->
 
-The [deriva/plantuml](https://gitlab.semantiqa.dev/deriva/plantuml)
+The [deriva/plantuml](https://github.com/derivasoftware)
 toolchain in Neovim: the real tree-sitter grammar (highlight, folds,
-indentation), and [plantuml-lsp](https://gitlab.semantiqa.dev/deriva/plantuml/plantuml-lsp)
+indentation), and [plantuml-lsp](https://github.com/derivasoftware/plantuml-lsp)
 — diagnostics and semantic lints, completion, hover with
 class↔sequence correlation, workspace-wide references and rename,
 go-to-definition across `!includesub`, formatting via plantuml-fmt.
@@ -24,7 +24,7 @@ lazy.nvim:
 ```lua
 {
   "deriva/plantuml.nvim",
-  url = "https://gitlab.semantiqa.dev/deriva/plantuml/plantuml.nvim.git",
+  url = "https://github.com/derivasoftware/plantuml.nvim.git",
   build = "make",
   ft = "plantuml",
   opts = {},
@@ -34,7 +34,7 @@ lazy.nvim:
 The language server (straight from git, or point `cmd` at a venv binary):
 
 ```bash
-pip install git+https://gitlab.semantiqa.dev/deriva/plantuml/plantuml-lsp.git@v0.7.1
+pip install git+https://github.com/derivasoftware/plantuml-lsp.git@v0.7.2
 ```
 
 ```lua

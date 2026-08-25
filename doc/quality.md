@@ -27,7 +27,7 @@ that reader exists.
 | Source files | 0 |
 | Source lines | 0 |
 | Documentation files | 4 |
-| Documentation lines (authored) | 111 |
+| Documentation lines (authored) | 124 |
 | Tests executed (UT) | 9 |
 | Tests executed (ST) | 42 |
 | UT line coverage | ? |
