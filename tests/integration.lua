@@ -7,7 +7,9 @@
 -- runs only when plantuml-render is available.
 
 local failed = {}
+local junit = dofile(vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":p:h") .. "/junit.lua")
 local function check(name, ok, detail)
+  junit.record(name, ok, detail)
   if not ok then table.insert(failed, name .. (detail and (" (" .. detail .. ")") or "")) end
   print((ok and "ok  " or "FAIL") .. " " .. name .. (ok and "" or (" :: " .. tostring(detail))))
 end
@@ -386,6 +388,7 @@ else
   print("skip preview (plantuml-render no disponible)")
 end
 
+junit.write(root .. "/test-results/junit-st.xml", "tests/integration.lua")
 if #failed > 0 then
   print("FAILED: " .. table.concat(failed, " | "))
   vim.cmd("cquit 1")

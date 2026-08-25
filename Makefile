@@ -2,7 +2,7 @@
 # parser plus the editor queries, both taken from the same tag so the
 # plugin never drifts from its grammar.
 
-GRAMMAR_URL ?= https://gitlab.semantiqa.dev/deriva/plantuml/tree-sitter-plantuml.git
+GRAMMAR_URL ?= https://github.com/derivasoftware/tree-sitter-plantuml.git
 GRAMMAR_TAG ?= v0.8.0
 BUILD := build/tree-sitter-plantuml
 

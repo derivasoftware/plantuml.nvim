@@ -1,0 +1,17 @@
+@startuml CL_Init
+' requirement REQ-00001-1
+' requirement REQ-00002-1
+
+!startsub Init
+
+namespace plantuml.init {
+  class "<<module>>" as Init {
+    + setup(opts)
+    + defaults
+    - plugin_root()
+  }
+}
+
+!endsub
+
+@enduml

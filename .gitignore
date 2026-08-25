@@ -2,3 +2,4 @@ build/
 parser/
 queries/plantuml/
 .ci-tools/
+test-results/

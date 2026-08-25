@@ -1,0 +1,17 @@
+@startuml CL_Preview
+' requirement REQ-00003-1
+
+!startsub Preview
+
+namespace plantuml.preview {
+  class "<<module>>" as Preview {
+    + setup()
+    + start(cmd, opts)
+    + stop()
+    - browser_open(url)
+  }
+}
+
+!endsub
+
+@enduml
