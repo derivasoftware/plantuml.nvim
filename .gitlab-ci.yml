@@ -32,8 +32,7 @@ smoke:
       if [ ! -x .ci-tools/lsp-venv/bin/plantuml-lsp ]; then
         python3 -m venv .ci-tools/lsp-venv
       fi
-    - GIT_CONFIG_GLOBAL="$CI_PROJECT_DIR/.gitconfig-ci"
-      .ci-tools/lsp-venv/bin/pip install -q --upgrade
-      "plantuml-lsp @ git+https://${CI_SERVER_HOST}/deriva/plantuml/plantuml-lsp.git@v0.7.2"
+    - .ci-tools/lsp-venv/bin/pip install -q --upgrade
+      "plantuml-lsp @ git+https://github.com/derivasoftware/plantuml-lsp.git@v0.7.2"
     - PLANTUML_LSP_BIN="$PWD/.ci-tools/lsp-venv/bin/plantuml-lsp"
       nvim --headless -u tests/minimal_init.lua -l tests/integration.lua
