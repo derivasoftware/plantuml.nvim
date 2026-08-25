@@ -1,0 +1,15 @@
+verification:
+  id: VER-00003-2
+  req_id: REQ-00003-1
+  title: The smoke proves the preview commands register; the served page answers end to end
+  description: >
+    The smoke asserts both preview commands exist; the integration suite
+    starts the server with the browser suppressed and asserts the
+    announced URL serves the interaction page. Revision 2 cites the case
+    ids the suites now record as junit evidence.
+  method: test
+  test_ids:
+    - tests/smoke.lua::preview commands
+    - "tests/integration.lua::preview: servidor anuncia URL"
+    - "tests/integration.lua::preview: la pagina responde"
+  status: APPROVED

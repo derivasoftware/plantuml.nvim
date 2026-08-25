@@ -1,9 +1,0 @@
-verification:
-  id: VER-00001-1
-  req_id: REQ-00001-1
-  title: The headless smoke proves parser and queries load from the built runtimepath
-  description: >
-    The headless smoke proves parser and queries load from the built runtimepath
-  method: test
-  test_ids:
-    - tests/smoke.lua

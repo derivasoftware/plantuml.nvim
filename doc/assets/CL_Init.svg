@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 242 246" width="242" height="246" class="pr-diagram" role="img">
+<title>CL_Init</title>
+<style>
+  :root { color-scheme: light dark; }
+  .pr-diagram { font-family: var(--pr-font, ui-monospace, monospace); font-size: 12px; }
+  .pr-box rect { fill: var(--pr-box-fill, #fdfdf6); stroke: var(--pr-stroke, #3b3b33); }
+  .pr-container > rect { fill: var(--pr-container-fill, none); stroke: var(--pr-stroke, #3b3b33); stroke-dasharray: none; }
+  .pr-note rect { fill: var(--pr-note-fill, #fbf6d9); stroke: var(--pr-stroke, #3b3b33); }
+  text { fill: var(--pr-text, #1c1c14); }
+  .pr-header { font-weight: 600; }
+  .pr-abstract .pr-header { font-style: italic; }
+  .pr-sep { stroke: var(--pr-stroke, #3b3b33); }
+  .pr-edge { stroke: var(--pr-stroke, #3b3b33); fill: none; }
+  .pr-edge-realization, .pr-edge-dependency, .pr-edge-attachment { stroke-dasharray: 6 4; }
+</style>
+<defs>
+  <marker id="pr-tri" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" orient="auto"><path d="M1,1 L13,6 L1,11 Z" fill="var(--pr-box-fill, #fdfdf6)" stroke="var(--pr-stroke, #3b3b33)"/></marker>
+  <marker id="pr-diamond-filled" viewBox="0 0 16 10" refX="15" refY="5" markerWidth="16" markerHeight="10" orient="auto"><path d="M1,5 L8,1 L15,5 L8,9 Z" fill="var(--pr-stroke, #3b3b33)"/></marker>
+  <marker id="pr-diamond" viewBox="0 0 16 10" refX="15" refY="5" markerWidth="16" markerHeight="10" orient="auto"><path d="M1,5 L8,1 L15,5 L8,9 Z" fill="var(--pr-box-fill, #fdfdf6)" stroke="var(--pr-stroke, #3b3b33)"/></marker>
+  <marker id="pr-arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" orient="auto"><path d="M1,1 L11,6 L1,11" fill="none" stroke="var(--pr-stroke, #3b3b33)"/></marker>
+</defs>
+<g id="plantuml.init" class="pr-container pr-classifier-namespace"><rect x="28" y="50" width="176" height="158"/><text class="pr-header" x="36" y="65">init</text></g>
+<g id="plantuml" class="pr-container pr-classifier-namespace"><rect x="10" y="10" width="212" height="216"/><text class="pr-header" x="18" y="25">plantuml</text></g>
+<g id="plantuml.init.Init" class="pr-box pr-classifier-class"><rect x="46" y="90" width="140" height="100"/><text class="pr-header" x="56" y="112">Init</text><line class="pr-sep" x1="46" y1="122" x2="186" y2="122"/><text x="56" y="134">+ defaults</text><line class="pr-sep" x1="46" y1="144" x2="186" y2="144"/><text x="56" y="156">+ setup(opts)</text><text x="56" y="174">- plugin_root()</text></g>
+</svg>

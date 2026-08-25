@@ -1,5 +1,11 @@
 # plantuml.nvim
 
+<!-- folio: colophon --project plantuml.nvim --junit test-results/junit-ut.xml --junit_st test-results/junit-st.xml -->
+![powered by: argos](https://img.shields.io/badge/powered%20by-argos-1f6feb) ![verified: 100%](https://img.shields.io/badge/verified-100%25-2ea44f) ![tests: 100%](https://img.shields.io/badge/tests-100%25-2ea44f) ![UT: n/a](https://img.shields.io/badge/UT-n%2Fa-lightgrey) ![ST: n/a](https://img.shields.io/badge/ST-n%2Fa-lightgrey) ![diagnostics: 13](https://img.shields.io/badge/diagnostics-13-dfb317)
+
+> **plantuml.nvim** is powered by **argos**. **folio** generates this documentation from the repository's model: 3 requirements · 3 verifications · 0 constraints. Quality: 100% verified · 100% tests passing.
+<!-- /folio -->
+
 The [deriva/plantuml](https://gitlab.semantiqa.dev/deriva/plantuml)
 toolchain in Neovim: the real tree-sitter grammar (highlight, folds,
 indentation), and [plantuml-lsp](https://gitlab.semantiqa.dev/deriva/plantuml/plantuml-lsp)
@@ -25,7 +31,11 @@ lazy.nvim:
 }
 ```
 
-The language server (`pip install plantuml-lsp`, or a venv binary):
+The language server (straight from git, or point `cmd` at a venv binary):
+
+```bash
+pip install git+https://gitlab.semantiqa.dev/deriva/plantuml/plantuml-lsp.git@v0.7.1
+```
 
 ```lua
 opts = { lsp = { cmd = { "/path/to/venv/bin/plantuml-lsp" } } }
@@ -56,13 +66,18 @@ the build step.
 
 ```bash
 make            # clone pinned grammar, build parser/plantuml.so, copy queries
-nvim --headless -u tests/minimal_init.lua -l tests/smoke.lua
+nvim --headless -u tests/minimal_init.lua -l tests/smoke.lua        # UT
+nvim --headless -u tests/minimal_init.lua -l tests/integration.lua  # ST: real keys, real server
 ```
+
+Both suites write junit reports under `test-results/`; the docs read
+them as evidence.
 
 Bumping the grammar = editing `GRAMMAR_TAG` in the Makefile and
 rebuilding; queries follow automatically.
 
-## Governance
+## Documentation
 
-An [argos](https://gitlab.semantiqa.dev/deriva/argos/argos) NA project —
-see `CLAUDE.md`.
+- [Architecture](doc/architecture.md): the model's diagrams, rendered from source
+- [Requirements & status](doc/requirements.md): what was asked and the traceability matrix
+- [Repo quality](doc/quality.md): artefact inventory and health metrics

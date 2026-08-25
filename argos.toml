@@ -1,0 +1,7 @@
+# Argos repository configuration. See ConfigReader for the schema.
+#
+# [project].asil declares the project's safety integrity level. NA
+# enables agent ownership; no [sources]: argos has no Lua reader yet.
+
+[project]
+asil = "NA"

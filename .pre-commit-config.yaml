@@ -1,0 +1,9 @@
+repos:
+
+  - repo: https://gitlab.semantiqa.dev/deriva/plantuml/plantuml-fmt
+    rev: v0.3.2
+    hooks:
+      - id: plantuml-fmt
+        # the cafetera fixtures carry deliberate defects and the suites
+        # assert hardcoded positions; formatting them would break both
+        exclude: '^tests/fixtures/'

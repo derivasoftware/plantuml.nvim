@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 30 30" width="30" height="30" class="pr-diagram" role="img">
+<style>
+  :root { color-scheme: light dark; }
+  .pr-diagram { font-family: var(--pr-font, ui-monospace, monospace); font-size: 12px; }
+  .pr-box rect { fill: var(--pr-box-fill, #fdfdf6); stroke: var(--pr-stroke, #3b3b33); }
+  .pr-container > rect { fill: var(--pr-container-fill, none); stroke: var(--pr-stroke, #3b3b33); stroke-dasharray: none; }
+  .pr-note rect { fill: var(--pr-note-fill, #fbf6d9); stroke: var(--pr-stroke, #3b3b33); }
+  text { fill: var(--pr-text, #1c1c14); }
+  .pr-header { font-weight: 600; }
+  .pr-abstract .pr-header { font-style: italic; }
+  .pr-sep { stroke: var(--pr-stroke, #3b3b33); }
+  .pr-edge { stroke: var(--pr-stroke, #3b3b33); fill: none; }
+  .pr-edge-realization, .pr-edge-dependency, .pr-edge-attachment { stroke-dasharray: 6 4; }
+</style>
+<defs>
+  <marker id="pr-tri" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" orient="auto"><path d="M1,1 L13,6 L1,11 Z" fill="var(--pr-box-fill, #fdfdf6)" stroke="var(--pr-stroke, #3b3b33)"/></marker>
+  <marker id="pr-diamond-filled" viewBox="0 0 16 10" refX="15" refY="5" markerWidth="16" markerHeight="10" orient="auto"><path d="M1,5 L8,1 L15,5 L8,9 Z" fill="var(--pr-stroke, #3b3b33)"/></marker>
+  <marker id="pr-diamond" viewBox="0 0 16 10" refX="15" refY="5" markerWidth="16" markerHeight="10" orient="auto"><path d="M1,5 L8,1 L15,5 L8,9 Z" fill="var(--pr-box-fill, #fdfdf6)" stroke="var(--pr-stroke, #3b3b33)"/></marker>
+  <marker id="pr-arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" orient="auto"><path d="M1,1 L11,6 L1,11" fill="none" stroke="var(--pr-stroke, #3b3b33)"/></marker>
+</defs>
+</svg>

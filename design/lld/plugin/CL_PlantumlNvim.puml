@@ -1,0 +1,14 @@
+@startuml CL_PlantumlNvim
+' requirement REQ-00001-1
+' requirement REQ-00002-1
+' requirement REQ-00003-1
+
+!startsub Init
+!includesub ./CL_Init.puml!Init
+!endsub
+
+!startsub Preview
+!includesub ./CL_Preview.puml!Preview
+!endsub
+
+@enduml

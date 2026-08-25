@@ -1,0 +1,19 @@
+verification:
+  id: VER-00002-2
+  req_id: REQ-00002-1
+  title: The smoke proves the editor wiring; the integration suite proves the server end to end
+  description: >
+    The smoke asserts filetype detection, error-free parsing, the fold
+    expression and the completion keymaps; the integration suite drives
+    a real Neovim with real keys against the real server and asserts
+    what is visible — the LSP attaches and completion declares its
+    trigger characters. Revision 2 cites the case ids the suites now
+    record as junit evidence.
+  method: test
+  test_ids:
+    - tests/smoke.lua::filetype
+    - tests/smoke.lua::foldexpr wired
+    - tests/smoke.lua::pum keys mapeadas (con LSP off no)
+    - tests/integration.lua::lsp attaches
+    - "tests/integration.lua::completion: trigger characters declarados"
+  status: APPROVED
