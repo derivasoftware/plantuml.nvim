@@ -4,10 +4,16 @@
 !startsub Preview
 
 namespace plantuml.preview {
-  class "<<module>>" as Preview {
+  class setup <<function>> {
     + setup()
+  }
+  class start <<function>> {
     + start(cmd, opts)
+  }
+  class stop <<function>> {
     + stop()
+  }
+  class browser_open <<function>> {
     - browser_open(url)
   }
 }

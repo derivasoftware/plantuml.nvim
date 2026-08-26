@@ -4,10 +4,11 @@
 
 !startsub Init
 
-namespace plantuml.init {
-  class "<<module>>" as Init {
+namespace plantuml {
+  class setup <<function>> {
     + setup(opts)
-    + defaults
+  }
+  class plugin_root <<function>> {
     - plugin_root()
   }
 }
