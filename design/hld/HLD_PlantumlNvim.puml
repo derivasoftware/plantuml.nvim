@@ -1,6 +1,9 @@
-@startuml
+@startuml HLD_PlantumlNvim
 ' requirement SREQ-00001-1
 ' requirement SREQ-00002-1
 !include ../../../argos-design-plantuml/src/argos_design_plantuml/style/argos-stereotypes.iuml
 
+namespace plantuml <<container>> {
+  namespace preview <<package>>
+}
 @enduml

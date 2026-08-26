@@ -1,0 +1,59 @@
+verification:
+  id: VER-00002-3
+  req_id: REQ-00002-1
+  title: The smoke proves the editor wiring; the integration suite proves the server end to end
+  description: >
+    The smoke asserts filetype detection, error-free parsing, the fold
+    expression and the completion keymaps; the integration suite drives
+    a real Neovim with real keys against the real server and asserts
+    what is visible. Revision 3 registers the full integration suite:
+    every language-server behaviour the editor wires (hover, gd,
+    completion, lints, code actions, references, rename) records its
+    case id as junit evidence, so static Lua test discovery maps each
+    one back to this verification.
+  method: test
+  test_ids:
+    - "tests/smoke.lua::filetype"
+    - "tests/smoke.lua::foldexpr wired"
+    - "tests/smoke.lua::pum keys mapeadas (con LSP off no)"
+    - "tests/integration.lua::lsp attaches"
+    - "tests/integration.lua::completion: trigger characters declarados"
+    - "tests/integration.lua::K participante: ficha del participante"
+    - "tests/integration.lua::K participante: trae la clase correlacionada"
+    - "tests/integration.lua::K maquina.Cafetera resuelve la clase"
+    - "tests/integration.lua::gd includesub: fichero hoja"
+    - "tests/integration.lua::gd includesub: linea del startsub"
+    - "tests/integration.lua::gd entidad: tipo de parametro -> CL_Pedido"
+    - "tests/integration.lua::gd entidad: aterriza en la clase"
+    - "tests/integration.lua::gd entidad: relacion cualificada -> CL_Pedido"
+    - "tests/integration.lua::gd llamada: moler -> CL_Molinillo"
+    - "tests/integration.lua::gd llamada: aterriza en el miembro"
+    - "tests/integration.lua::K llamada: firma declarada"
+    - "tests/integration.lua::lint llamada: afilar no declarado avisa"
+    - "tests/integration.lua::lint llamada: moler declarado calla"
+    - "tests/integration.lua::lint llamada: error() sin declaracion global (Information)"
+    - "tests/integration.lua::gd accion: calentar -> CL_Cafetera"
+    - "tests/integration.lua::gd accion: aterriza en el miembro"
+    - "tests/integration.lua::K accion: firma declarada"
+    - "tests/integration.lua::K carril: ficha de la clase"
+    - "tests/integration.lua::lint accion: afilar bajo Molinillo avisa"
+    - "tests/integration.lua::references metodo: incluye la secuencia"
+    - "tests/integration.lua::references metodo: incluye la actividad"
+    - "tests/integration.lua::completion tras ':': metodos del receptor"
+    - "tests/integration.lua::completion tras ':': la firma como detalle"
+    - "tests/integration.lua::completion tras ':': sin keywords"
+    - "tests/integration.lua::completion tras flecha: participantes sin keywords"
+    - "tests/integration.lua::lints: llegan"
+    - "tests/integration.lua::lints: 3 errores"
+    - "tests/integration.lua::lints: 2 warnings"
+    - "tests/integration.lua::lints: deriva de Duende en el SEQ"
+    - "tests/integration.lua::action: crear declaracion de Fantasma"
+    - "tests/integration.lua::action: class Fantasma insertada"
+    - "tests/integration.lua::action: corregir ruta del include"
+    - "tests/integration.lua::action: declarar afilar en Molinillo"
+    - "tests/integration.lua::action: miembro afilar en el CL"
+    - "tests/integration.lua::references: hoja y secuencia"
+    - "tests/integration.lua::references: agregado cualificado (PUML-28)"
+    - "tests/integration.lua::rename: hoja renombrada"
+    - "tests/integration.lua::rename: secuencia renombrada"
+  status: APPROVED

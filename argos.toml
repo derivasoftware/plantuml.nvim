@@ -1,7 +1,11 @@
 # Argos repository configuration. See ConfigReader for the schema.
 #
 # [project].asil declares the project's safety integrity level. NA
-# enables agent ownership; no [sources]: argos has no Lua reader yet.
+# enables agent ownership. [sources] lua feeds the argos-implementation-lua
+# reader (functions-first: chunk-level declarations, require-path namespaces).
 
 [project]
 asil = "NA"
+
+[sources]
+lua = ["lua"]

@@ -8,7 +8,7 @@
 !endsub
 
 !startsub Preview
-!includesub ./CL_Preview.puml!Preview
+!includesub ./preview/CL_Preview.puml!Preview
 !endsub
 
 @enduml

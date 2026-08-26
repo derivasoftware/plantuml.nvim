@@ -34,10 +34,14 @@ if ok_parser and parser then
   check("parses without errors", not tree:root():has_error())
 end
 
-for _, q in ipairs({ "highlights", "folds", "indents" }) do
-  local ok_q, query = pcall(vim.treesitter.query.get, "plantuml", q)
-  check("query " .. q, ok_q and query ~= nil)
-end
+-- Literal names (no loop): static test discovery reads the first
+-- argument of each check(...) call, so the case ids must be literals.
+local ok_hi, query_hi = pcall(vim.treesitter.query.get, "plantuml", "highlights")
+check("query highlights", ok_hi and query_hi ~= nil)
+local ok_fold, query_fold = pcall(vim.treesitter.query.get, "plantuml", "folds")
+check("query folds", ok_fold and query_fold ~= nil)
+local ok_ind, query_ind = pcall(vim.treesitter.query.get, "plantuml", "indents")
+check("query indents", ok_ind and query_ind ~= nil)
 
 check("foldexpr wired", vim.wo.foldmethod == "expr")
 
