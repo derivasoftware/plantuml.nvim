@@ -32,5 +32,5 @@ that reader exists.
 | Tests executed (ST) | 42 |
 | UT line coverage | ? |
 | ST line coverage | ? |
-| argos diagnostics | 13 |
+| argos diagnostics | 59 |
 <!-- /folio -->

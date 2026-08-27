@@ -1,7 +1,7 @@
 # plantuml.nvim
 
 <!-- folio: colophon --project plantuml.nvim --junit test-results/junit-ut.xml --junit_st test-results/junit-st.xml -->
-![powered by: argos](https://img.shields.io/badge/powered%20by-argos-1f6feb) ![verified: 100%](https://img.shields.io/badge/verified-100%25-2ea44f) ![tests: 100%](https://img.shields.io/badge/tests-100%25-2ea44f) ![UT: n/a](https://img.shields.io/badge/UT-n%2Fa-lightgrey) ![ST: n/a](https://img.shields.io/badge/ST-n%2Fa-lightgrey) ![diagnostics: 13](https://img.shields.io/badge/diagnostics-13-dfb317)
+![powered by: argos](https://img.shields.io/badge/powered%20by-argos-1f6feb) ![verified: 100%](https://img.shields.io/badge/verified-100%25-2ea44f) ![tests: 100%](https://img.shields.io/badge/tests-100%25-2ea44f) ![UT: n/a](https://img.shields.io/badge/UT-n%2Fa-lightgrey) ![ST: n/a](https://img.shields.io/badge/ST-n%2Fa-lightgrey) ![diagnostics: 59](https://img.shields.io/badge/diagnostics-59-dfb317)
 
 > **plantuml.nvim** is powered by **argos**. **folio** generates this documentation from the repository's model: 3 requirements · 3 verifications · 0 constraints. Quality: 100% verified · 100% tests passing.
 <!-- /folio -->
@@ -34,7 +34,7 @@ lazy.nvim:
 The language server (straight from git, or point `cmd` at a venv binary):
 
 ```bash
-pip install git+https://github.com/derivasoftware/plantuml-lsp.git@v0.7.2
+pip install git+https://github.com/derivasoftware/plantuml-lsp.git@v0.7.3
 ```
 
 ```lua
