@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 30 30" width="30" height="30" class="pr-diagram" role="img">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 158 146" width="158" height="146" class="pr-diagram" role="img">
+<title>HLD_PlantumlNvim</title>
 <style>
   :root { color-scheme: light dark; }
   .pr-diagram { font-family: var(--pr-font, ui-monospace, monospace); font-size: 12px; }
@@ -18,4 +19,6 @@
   <marker id="pr-diamond" viewBox="0 0 16 10" refX="15" refY="5" markerWidth="16" markerHeight="10" orient="auto"><path d="M1,5 L8,1 L15,5 L8,9 Z" fill="var(--pr-box-fill, #fdfdf6)" stroke="var(--pr-stroke, #3b3b33)"/></marker>
   <marker id="pr-arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" orient="auto"><path d="M1,1 L11,6 L1,11" fill="none" stroke="var(--pr-stroke, #3b3b33)"/></marker>
 </defs>
+<g id="plantuml.preview" class="pr-container pr-classifier-namespace"><rect x="28" y="50" width="92" height="58"/><text class="pr-header" x="36" y="65">preview</text></g>
+<g id="plantuml" class="pr-container pr-classifier-namespace"><rect x="10" y="10" width="128" height="116"/><text class="pr-header" x="18" y="25">plantuml</text></g>
 </svg>

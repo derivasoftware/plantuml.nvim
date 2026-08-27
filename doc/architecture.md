@@ -20,10 +20,10 @@ _hld · `design/hld/HLD_PlantumlNvim.puml`_
 
 #### CL_PlantumlNvim
 
-_cl · `design/lld/plugin/CL_PlantumlNvim.puml`_
+_cl · `design/lld/plantuml/CL_PlantumlNvim.puml`_
 
 - traces to: `REQ-00001-1` `REQ-00002-1` `REQ-00003-1`
-- verified by: `tests/integration.lua` (4) · `tests/smoke.lua` (9)
+- verified by: `tests/integration.lua` (42) · `tests/smoke.lua` (9)
 
 ![CL_PlantumlNvim](assets/CL_PlantumlNvim.svg)
 
@@ -32,8 +32,8 @@ _cl · `design/lld/plugin/CL_PlantumlNvim.puml`_
 <details>
 <summary><code>CL_Init</code> · traces to <code>REQ-00001-1</code> <code>REQ-00002-1</code></summary>
 <ul>
-<li>source: <code>design/lld/plugin/CL_Init.puml</code></li>
-<li>verified by: <code>tests/integration.lua</code> (2), <code>tests/smoke.lua</code> (8)</li>
+<li>source: <code>design/lld/plantuml/CL_Init.puml</code></li>
+<li>verified by: <code>tests/integration.lua</code> (40), <code>tests/smoke.lua</code> (8)</li>
 </ul>
 <p><img alt="CL_Init" src="assets/CL_Init.svg"></p>
 </details>
@@ -41,7 +41,7 @@ _cl · `design/lld/plugin/CL_PlantumlNvim.puml`_
 <details>
 <summary><code>CL_Preview</code> · traces to <code>REQ-00003-1</code></summary>
 <ul>
-<li>source: <code>design/lld/plugin/CL_Preview.puml</code></li>
+<li>source: <code>design/lld/plantuml/preview/CL_Preview.puml</code></li>
 <li>verified by: <code>tests/integration.lua</code> (2), <code>tests/smoke.lua</code> (1)</li>
 </ul>
 <p><img alt="CL_Preview" src="assets/CL_Preview.svg"></p>
