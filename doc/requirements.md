@@ -11,8 +11,8 @@ read from that gap; the junit reports are what the last runs executed.
 <!-- folio: sreqs --junit test-results/junit-ut.xml --junit_st test-results/junit-st.xml -->
 | SREQ | Title | Implemented | UT | ST |
 | --- | --- | --- | --- | --- |
-| `SREQ-00001-1` | The plugin shall bring the PlantUML toolchain to Neovim | ? | ✓ | ~ |
-| `SREQ-00002-1` | The plugin shall serve the interactive preview from a local page | ? | ✓ | ✓ |
+| `SREQ-00001-1` | The plugin shall bring the PlantUML toolchain to Neovim | ✓ | ✓ | ~ |
+| `SREQ-00002-1` | The plugin shall serve the interactive preview from a local page | ✓ | ✓ | ✓ |
 <!-- /folio -->
 
 ## Total traceability
