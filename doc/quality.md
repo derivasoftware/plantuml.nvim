@@ -17,20 +17,20 @@ that reader exists.
 | Constraints | 0 |
 | Design diagrams | 4 |
 | Code classes | 0 |
-| Free functions | 0 |
-| Test cases | 0 |
+| Free functions | 6 |
+| Test cases | 51 |
 
 ### Metrics
 
 | Metric | Value |
 | --- | --- |
-| Source files | 0 |
-| Source lines | 0 |
+| Source files | 2 |
+| Source lines | 178 |
 | Documentation files | 4 |
 | Documentation lines (authored) | 124 |
 | Tests executed (UT) | 9 |
 | Tests executed (ST) | 42 |
 | UT line coverage | ? |
 | ST line coverage | ? |
-| argos diagnostics | 59 |
+| argos diagnostics | 0 |
 <!-- /folio -->
