@@ -9,7 +9,7 @@ verification:
     ids the suites now record as junit evidence.
   method: test
   test_ids:
-    - tests/smoke.lua::preview commands
-    - "tests/integration.lua::preview: servidor anuncia URL"
-    - "tests/integration.lua::preview: la pagina responde"
+    - tests/wiring.lua::preview commands
+    - "tests/editor.lua::preview: servidor anuncia URL"
+    - "tests/editor.lua::preview: la pagina responde"
   status: APPROVED

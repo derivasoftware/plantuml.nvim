@@ -1,5 +1,5 @@
 # CI — plantuml.nvim. Build the pinned grammar into the runtimepath and
-# run the headless smoke on the shell runner's Neovim.
+# run the headless suites on the shell runner's Neovim.
 
 include:
   - project: deriva/infra/ci-templates
@@ -32,8 +32,8 @@ smoke:
       url."https://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_SERVER_HOST}/deriva/plantuml/".insteadOf
       "https://github.com/derivasoftware/"
     - make clean && make
-    - nvim --headless -u tests/minimal_init.lua -l tests/smoke.lua
-    # integration: real keys against the real language server
+    - nvim --headless -u tests/minimal_init.lua -l tests/wiring.lua
+    # editor suite: real keys against the real language server
     - |
       if [ ! -x .ci-tools/lsp-venv/bin/plantuml-lsp ]; then
         python3 -m venv .ci-tools/lsp-venv
@@ -41,4 +41,4 @@ smoke:
     - .ci-tools/lsp-venv/bin/pip install -q --upgrade
       "plantuml-lsp @ git+https://github.com/derivasoftware/plantuml-lsp.git@v0.7.7"
     - PLANTUML_LSP_BIN="$PWD/.ci-tools/lsp-venv/bin/plantuml-lsp"
-      nvim --headless -u tests/minimal_init.lua -l tests/integration.lua
+      nvim --headless -u tests/minimal_init.lua -l tests/editor.lua

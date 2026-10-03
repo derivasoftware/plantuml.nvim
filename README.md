@@ -66,8 +66,8 @@ the build step.
 
 ```bash
 make            # clone pinned grammar, build parser/plantuml.so, copy queries
-nvim --headless -u tests/minimal_init.lua -l tests/smoke.lua        # UT
-nvim --headless -u tests/minimal_init.lua -l tests/integration.lua  # ST: real keys, real server
+nvim --headless -u tests/minimal_init.lua -l tests/wiring.lua        # UT
+nvim --headless -u tests/minimal_init.lua -l tests/editor.lua  # ST: real keys, real server
 ```
 
 Both suites write junit reports under `test-results/`; the docs read
