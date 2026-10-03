@@ -9,9 +9,9 @@ verification:
     ids the suites now record as junit evidence.
   method: test
   test_ids:
-    - tests/smoke.lua::parser loads
-    - tests/smoke.lua::parses without errors
-    - tests/smoke.lua::query highlights
-    - tests/smoke.lua::query folds
-    - tests/smoke.lua::query indents
+    - tests/wiring.lua::parser loads
+    - tests/wiring.lua::parses without errors
+    - tests/wiring.lua::query highlights
+    - tests/wiring.lua::query folds
+    - tests/wiring.lua::query indents
   status: APPROVED

@@ -2,7 +2,7 @@
 -- LSP — and assert what is VISIBLE: hover floats, diagnostics,
 -- quickfix, buffers after a rename, the served preview answering.
 --
--- Run: nvim --headless -u tests/minimal_init.lua -l tests/integration.lua
+-- Run: nvim --headless -u tests/minimal_init.lua -l tests/editor.lua
 -- Needs plantuml-lsp on PATH (or $PLANTUML_LSP_BIN). The preview block
 -- runs only when plantuml-render is available.
 
@@ -388,7 +388,7 @@ else
   print("skip preview (plantuml-render no disponible)")
 end
 
-junit.write(root .. "/test-results/junit-st.xml", "tests/integration.lua")
+junit.write(root .. "/test-results/junit-st.xml", "tests/editor.lua")
 if #failed > 0 then
   print("FAILED: " .. table.concat(failed, " | "))
   vim.cmd("cquit 1")

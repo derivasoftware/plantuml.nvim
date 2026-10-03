@@ -1,5 +1,5 @@
 -- Headless smoke: filetype wiring, parser load, queries, folding.
--- Run: nvim --headless -u tests/minimal_init.lua -l tests/smoke.lua
+-- Run: nvim --headless -u tests/minimal_init.lua -l tests/wiring.lua
 local failed = {}
 local suite_root = vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":p:h:h")
 local junit = dofile(suite_root .. "/tests/junit.lua")
@@ -55,7 +55,7 @@ for _, m in ipairs(vim.api.nvim_buf_get_keymap(0, "i")) do
 end
 check("pum keys mapeadas (con LSP off no)", not has_tab)
 
-junit.write(suite_root .. "/test-results/junit-ut.xml", "tests/smoke.lua")
+junit.write(suite_root .. "/test-results/junit-ut.xml", "tests/wiring.lua")
 if #failed > 0 then
   print("FAILED: " .. table.concat(failed, ", "))
   vim.cmd("cquit 1")
