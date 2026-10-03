@@ -40,5 +40,11 @@ smoke:
     - rm -rf .ci-tools/lsp-venv && python3 -m venv .ci-tools/lsp-venv
     - .ci-tools/lsp-venv/bin/pip install -q
       "plantuml-lsp @ git+https://github.com/derivasoftware/plantuml-lsp.git@v0.7.7"
+    # the server must at least import and answer --help before the editor
+    # drives it: a start failure here names its cause in the job log instead
+    # of surfacing as "lsp attaches :: nil" in the suite
+    - .ci-tools/lsp-venv/bin/python --version
+    - .ci-tools/lsp-venv/bin/pip list 2>/dev/null | grep -iE 'plantuml|tree.sitter'
+    - .ci-tools/lsp-venv/bin/python -c "import plantuml_lsp.server"
     - PLANTUML_LSP_BIN="$PWD/.ci-tools/lsp-venv/bin/plantuml-lsp"
       nvim --headless -u tests/minimal_init.lua -l tests/editor.lua
