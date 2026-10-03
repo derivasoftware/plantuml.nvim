@@ -38,8 +38,9 @@ smoke:
     # jobs, and a server venv assembled months ago starts failing when
     # its binary dependencies and the upgraded package no longer agree
     - rm -rf .ci-tools/lsp-venv && python3 -m venv .ci-tools/lsp-venv
-    - .ci-tools/lsp-venv/bin/pip install -q
+    - .ci-tools/lsp-venv/bin/pip install -q --no-cache-dir
       "plantuml-lsp @ git+https://github.com/derivasoftware/plantuml-lsp.git@v0.7.7"
+    - cat .ci-tools/lsp-venv/lib/python3*/site-packages/plantuml_fmt-*.dist-info/direct_url.json || true
     # the server must at least import and answer --help before the editor
     # drives it: a start failure here names its cause in the job log instead
     # of surfacing as "lsp attaches :: nil" in the suite
