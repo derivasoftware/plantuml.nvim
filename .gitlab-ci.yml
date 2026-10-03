@@ -34,11 +34,11 @@ smoke:
     - make clean && make
     - nvim --headless -u tests/minimal_init.lua -l tests/wiring.lua
     # editor suite: real keys against the real language server
-    - |
-      if [ ! -x .ci-tools/lsp-venv/bin/plantuml-lsp ]; then
-        python3 -m venv .ci-tools/lsp-venv
-      fi
-    - .ci-tools/lsp-venv/bin/pip install -q --upgrade
+    # a fresh venv every run: the shell runner keeps .ci-tools between
+    # jobs, and a server venv assembled months ago starts failing when
+    # its binary dependencies and the upgraded package no longer agree
+    - rm -rf .ci-tools/lsp-venv && python3 -m venv .ci-tools/lsp-venv
+    - .ci-tools/lsp-venv/bin/pip install -q
       "plantuml-lsp @ git+https://github.com/derivasoftware/plantuml-lsp.git@v0.7.7"
     - PLANTUML_LSP_BIN="$PWD/.ci-tools/lsp-venv/bin/plantuml-lsp"
       nvim --headless -u tests/minimal_init.lua -l tests/editor.lua
