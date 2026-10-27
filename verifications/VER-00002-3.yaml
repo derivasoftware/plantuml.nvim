@@ -11,6 +11,8 @@ verification:
     completion, lints, code actions, references, rename) records its
     case id as junit evidence, so static Lua test discovery maps each
     one back to this verification.
+    Native completion and its menu keys turn on only without a completion
+    engine; with blink.cmp present the engine owns the menu (PUML-105).
   method: test
   test_ids:
     - "tests/wiring.lua::filetype"
@@ -56,4 +58,6 @@ verification:
     - "tests/editor.lua::references: agregado cualificado (PUML-28)"
     - "tests/editor.lua::rename: hoja renombrada"
     - "tests/editor.lua::rename: secuencia renombrada"
+    - "tests/editor.lua::native completion: on without an engine (Tab cycles the menu)"
+    - "tests/editor.lua::native completion: an engine owns the menu and the keys"
   status: APPROVED
