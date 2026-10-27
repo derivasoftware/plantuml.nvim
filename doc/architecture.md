@@ -24,7 +24,7 @@ _cl · `design/lld/plantuml/CL_PlantumlNvim.puml`_
 
 - traces to: `REQ-00001-1` `REQ-00002-1` `REQ-00003-1`
 - implemented in: `lua/plantuml/init.lua` · `lua/plantuml/preview.lua`
-- verified by: `tests/integration.lua` (42) · `tests/smoke.lua` (9)
+- verified by: `tests/editor.lua` (44) · `tests/wiring.lua` (9)
 
 ![CL_PlantumlNvim](assets/CL_PlantumlNvim.svg)
 
@@ -35,7 +35,7 @@ _cl · `design/lld/plantuml/CL_PlantumlNvim.puml`_
 <ul>
 <li>source: <code>design/lld/plantuml/CL_Init.puml</code></li>
 <li>implemented in: <code>lua/plantuml/init.lua</code></li>
-<li>verified by: <code>tests/integration.lua</code> (40), <code>tests/smoke.lua</code> (8)</li>
+<li>verified by: <code>tests/editor.lua</code> (42), <code>tests/wiring.lua</code> (8)</li>
 </ul>
 <p><img alt="CL_Init" src="assets/CL_Init.svg"></p>
 </details>
@@ -45,7 +45,7 @@ _cl · `design/lld/plantuml/CL_PlantumlNvim.puml`_
 <ul>
 <li>source: <code>design/lld/plantuml/preview/CL_Preview.puml</code></li>
 <li>implemented in: <code>lua/plantuml/preview.lua</code></li>
-<li>verified by: <code>tests/integration.lua</code> (2), <code>tests/smoke.lua</code> (1)</li>
+<li>verified by: <code>tests/editor.lua</code> (2), <code>tests/wiring.lua</code> (1)</li>
 </ul>
 <p><img alt="CL_Preview" src="assets/CL_Preview.svg"></p>
 </details>

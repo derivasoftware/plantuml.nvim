@@ -1,30 +1,97 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 782 334" width="782" height="334" class="pr-diagram" role="img">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 744 450" width="744" height="450" style="max-width:100%;height:auto" class="pr-diagram" role="img">
 <title>CL_PlantumlNvim</title>
 <style>
-  :root { color-scheme: light dark; }
-  .pr-diagram { font-family: var(--pr-font, ui-monospace, monospace); font-size: 12px; }
-  .pr-box rect { fill: var(--pr-box-fill, #fdfdf6); stroke: var(--pr-stroke, #3b3b33); }
-  .pr-container > rect { fill: var(--pr-container-fill, none); stroke: var(--pr-stroke, #3b3b33); stroke-dasharray: none; }
-  .pr-note rect { fill: var(--pr-note-fill, #fbf6d9); stroke: var(--pr-stroke, #3b3b33); }
-  text { fill: var(--pr-text, #1c1c14); }
-  .pr-header { font-weight: 600; }
-  .pr-abstract .pr-header { font-style: italic; }
-  .pr-sep { stroke: var(--pr-stroke, #3b3b33); }
-  .pr-edge { stroke: var(--pr-stroke, #3b3b33); fill: none; }
-  .pr-edge-realization, .pr-edge-dependency, .pr-edge-attachment { stroke-dasharray: 6 4; }
+  .pr-diagram { font-family: var(--pr-font, "JetBrains Mono", "Cascadia Code", "SFMono-Regular", Menlo, Consolas, ui-monospace, monospace); font-size: 12px;
+    --pr-text: #1e293b; --pr-muted: #64748b; --pr-stroke: #64748b; --pr-edge: #64748b; --pr-box-fill: #ffffff; --pr-container-fill: #f8fafc; --pr-container-stroke: #94a3b8;
+    --pr-note-fill: #fffbeb; --pr-note-stroke: #fcd34d; --pr-head-class: #eef2ff; --pr-head-interface: #ecfdf5; --pr-head-enum: #fff7ed; --pr-head-function: #f1f5f9; --pr-head-abstract: #f5f3ff;
+    --pr-badge-class: #4f46e5; --pr-badge-interface: #059669; --pr-badge-enum: #d97706; --pr-badge-function: #475569; --pr-badge-abstract: #7c3aed;
+    --pr-name: #0f172a; --pr-type: #2563eb; --pr-param: #475569; --pr-punct: #94a3b8;
+    --pr-vis-public: #16a34a; --pr-vis-private: #dc2626; --pr-vis-protected: #d97706; --pr-vis-package: #2563eb;
+    --pr-port-in: #2563eb; --pr-port-out: #c2730a; --pr-focus: #c2730a; --pr-dimmed: .25;
+    --pr-stroke-width: 1; --pr-container-stroke-width: 1; --pr-edge-width: 1; --pr-edge-hit: 12; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pr-diagram { --pr-text: #e2e8f0; --pr-muted: #94a3b8; --pr-stroke: #94a3b8; --pr-edge: #94a3b8; --pr-box-fill: #1e293b; --pr-container-fill: #0f172a; --pr-container-stroke: #64748b;
+    --pr-note-fill: #3b3418; --pr-note-stroke: #a16207; --pr-head-class: #312e81; --pr-head-interface: #064e3b; --pr-head-enum: #78350f; --pr-head-function: #334155; --pr-head-abstract: #4c1d95;
+    --pr-badge-class: #a5b4fc; --pr-badge-interface: #6ee7b7; --pr-badge-enum: #fcd34d; --pr-badge-function: #cbd5e1; --pr-badge-abstract: #c4b5fd;
+    --pr-name: #f8fafc; --pr-type: #7dd3fc; --pr-param: #cbd5e1; --pr-punct: #64748b; --pr-vis-public: #4ade80; --pr-vis-private: #f87171; --pr-vis-protected: #fbbf24; --pr-vis-package: #60a5fa; --pr-port-in: #60a5fa; --pr-port-out: #fbbf24; --pr-focus: #fbbf24; --pr-dimmed: .3; } }
+  [data-theme="dark"] .pr-diagram { --pr-text: #e2e8f0; --pr-muted: #94a3b8; --pr-stroke: #94a3b8; --pr-edge: #94a3b8; --pr-box-fill: #1e293b; --pr-container-fill: #0f172a; --pr-container-stroke: #64748b;
+    --pr-note-fill: #3b3418; --pr-note-stroke: #a16207; --pr-head-class: #312e81; --pr-head-interface: #064e3b; --pr-head-enum: #78350f; --pr-head-function: #334155; --pr-head-abstract: #4c1d95;
+    --pr-badge-class: #a5b4fc; --pr-badge-interface: #6ee7b7; --pr-badge-enum: #fcd34d; --pr-badge-function: #cbd5e1; --pr-badge-abstract: #c4b5fd;
+    --pr-name: #f8fafc; --pr-type: #7dd3fc; --pr-param: #cbd5e1; --pr-punct: #64748b; --pr-vis-public: #4ade80; --pr-vis-private: #f87171; --pr-vis-protected: #fbbf24; --pr-vis-package: #60a5fa; --pr-port-in: #60a5fa; --pr-port-out: #fbbf24; --pr-focus: #fbbf24; --pr-dimmed: .3; }
+  .pr-diagram text { fill: var(--pr-text); }
+  .pr-diagram rect, .pr-diagram line.pr-sep { shape-rendering: crispEdges; }
+  .pr-diagram rect, .pr-diagram path, .pr-diagram line { vector-effect: non-scaling-stroke; }
+  .pr-diagram .pr-box > rect { fill: var(--pr-box-fill); stroke: var(--pr-stroke); stroke-width: var(--pr-stroke-width); }
+  .pr-diagram .pr-port > rect { fill: var(--pr-port-in); stroke: none; }
+  .pr-diagram .pr-port-out > rect { fill: var(--pr-port-out); }
+  .pr-diagram .pr-port-label { fill: var(--pr-muted); font-size: 10px; }
+  .pr-diagram .pr-head { fill: var(--pr-head-class); stroke: none; }
+  .pr-diagram .pr-classifier-interface .pr-head { fill: var(--pr-head-interface); }
+  .pr-diagram .pr-classifier-enum .pr-head { fill: var(--pr-head-enum); }
+  .pr-diagram .pr-classifier-function .pr-head, .pr-diagram .pr-stereotype-function .pr-head { fill: var(--pr-head-function); }
+  .pr-diagram .pr-abstract .pr-head { fill: var(--pr-head-abstract); }
+  .pr-diagram .pr-badge { fill: var(--pr-badge-class); }
+  .pr-diagram .pr-classifier-interface .pr-badge { fill: var(--pr-badge-interface); }
+  .pr-diagram .pr-classifier-enum .pr-badge { fill: var(--pr-badge-enum); }
+  .pr-diagram .pr-classifier-function .pr-badge, .pr-diagram .pr-stereotype-function .pr-badge { fill: var(--pr-badge-function); }
+  .pr-diagram .pr-abstract .pr-badge { fill: var(--pr-badge-abstract); }
+  .pr-diagram .pr-badge-text { fill: var(--pr-box-fill); font-size: 9.5px; font-weight: 700; }
+  .pr-diagram .pr-header { font-weight: 700; fill: var(--pr-name); }
+  .pr-diagram .pr-abstract .pr-header { font-style: italic; }
+  .pr-diagram .pr-stereo { fill: var(--pr-muted); font-size: 10.5px; }
+  .pr-diagram .pr-sep { stroke: var(--pr-stroke); }
+  .pr-diagram .pr-name { fill: var(--pr-name); }
+  .pr-diagram .pr-type { fill: var(--pr-type); }
+  .pr-diagram .pr-param { fill: var(--pr-param); }
+  .pr-diagram .pr-punct { fill: var(--pr-punct); }
+  .pr-diagram .pr-static { text-decoration: underline; }
+  .pr-diagram .pr-abstract-member { font-style: italic; }
+  .pr-diagram .pr-vis-public { fill: var(--pr-vis-public); }
+  .pr-diagram .pr-vis-private { fill: var(--pr-vis-private); }
+  .pr-diagram .pr-vis-protected { fill: var(--pr-vis-protected); }
+  .pr-diagram .pr-vis-package { fill: var(--pr-vis-package); }
+  .pr-diagram .pr-container > rect { fill: var(--pr-container-fill); stroke: var(--pr-container-stroke); stroke-width: var(--pr-container-stroke-width); }
+  .pr-diagram .pr-container > .pr-header { fill: var(--pr-muted); font-weight: 600; font-size: 11px; letter-spacing: .4px; }
+  .pr-diagram .pr-note path { fill: var(--pr-note-fill); stroke: var(--pr-note-stroke); }
+  .pr-diagram .pr-action > rect { fill: var(--pr-box-fill); stroke: var(--pr-stroke); }
+  .pr-diagram .pr-action text, .pr-diagram .pr-decision text { text-anchor: middle; }
+  .pr-diagram .pr-decision > path { fill: var(--pr-head-enum); stroke: var(--pr-stroke); }
+  .pr-diagram .pr-start circle, .pr-diagram .pr-bar rect, .pr-diagram .pr-end .pr-core { fill: var(--pr-text); stroke: none; }
+  .pr-diagram .pr-end .pr-ring { fill: var(--pr-box-fill); stroke: var(--pr-text); stroke-width: 1.5px; }
+  .pr-diagram .pr-end .pr-cross { fill: none; stroke: var(--pr-text); stroke-width: 1.5px; }
+  .pr-diagram .pr-classifier-swimlane > rect { fill: var(--pr-box-fill); stroke: var(--pr-container-stroke); }
+  .pr-diagram .pr-classifier-swimlane > .pr-header { font-size: 12px; letter-spacing: .2px; }
+  .pr-diagram marker .pr-solid { fill: var(--pr-edge); stroke: var(--pr-edge); }
+  .pr-diagram .pr-notice rect { fill: var(--pr-container-fill); stroke: var(--pr-muted); stroke-dasharray: 5 3; }
+  .pr-diagram .pr-notice text { fill: var(--pr-muted); font-style: italic; }
+  .pr-diagram .pr-edge { stroke: var(--pr-edge); stroke-width: var(--pr-edge-width); fill: none; pointer-events: none; }
+  .pr-diagram .pr-edge-hit { stroke: transparent; stroke-width: var(--pr-edge-hit, 12); fill: none; pointer-events: stroke; }
+  .pr-diagram.pr-focusing .pr-box > rect, .pr-diagram.pr-focusing .pr-action > rect,
+  .pr-diagram.pr-focusing .pr-container > rect, .pr-diagram.pr-focusing .pr-edge,
+  .pr-diagram.pr-focusing .pr-edge-label, .pr-diagram.pr-focusing text { opacity: var(--pr-dimmed, .25); }
+  .pr-diagram .pr-focus > rect, .pr-diagram .pr-focus .pr-edge, .pr-diagram .pr-focus text,
+  .pr-diagram .pr-focus > text, .pr-diagram .pr-focus + .pr-edge-label { opacity: 1; }
+  .pr-diagram .pr-focus-root > rect { stroke: var(--pr-focus, #c2730a); stroke-width: 2; }
+  .pr-diagram .pr-focus-root .pr-edge { stroke: var(--pr-focus, #c2730a); }
+  .pr-diagram .pr-edge-realization, .pr-diagram .pr-edge-dependency, .pr-diagram .pr-edge-attachment { stroke-dasharray: 6 4; }
+  .pr-diagram .pr-edge-label { fill: var(--pr-muted); font-size: 11px; paint-order: stroke; stroke: var(--pr-box-fill); stroke-width: 3px; stroke-linejoin: round; }
+  .pr-diagram marker path { fill: var(--pr-box-fill); stroke: var(--pr-edge); }
+  .pr-diagram marker .pr-filled { fill: var(--pr-edge); }
+  .pr-diagram marker .pr-open { fill: none; }
 </style>
 <defs>
-  <marker id="pr-tri" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" orient="auto"><path d="M1,1 L13,6 L1,11 Z" fill="var(--pr-box-fill, #fdfdf6)" stroke="var(--pr-stroke, #3b3b33)"/></marker>
-  <marker id="pr-diamond-filled" viewBox="0 0 16 10" refX="15" refY="5" markerWidth="16" markerHeight="10" orient="auto"><path d="M1,5 L8,1 L15,5 L8,9 Z" fill="var(--pr-stroke, #3b3b33)"/></marker>
-  <marker id="pr-diamond" viewBox="0 0 16 10" refX="15" refY="5" markerWidth="16" markerHeight="10" orient="auto"><path d="M1,5 L8,1 L15,5 L8,9 Z" fill="var(--pr-box-fill, #fdfdf6)" stroke="var(--pr-stroke, #3b3b33)"/></marker>
-  <marker id="pr-arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" orient="auto"><path d="M1,1 L11,6 L1,11" fill="none" stroke="var(--pr-stroke, #3b3b33)"/></marker>
+  <marker id="pr6d7374-tri" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" orient="auto"><path d="M1,1 L13,6 L1,11 Z"/></marker>
+  <marker id="pr6d7374-diamond-filled" viewBox="0 0 16 10" refX="15" refY="5" markerWidth="16" markerHeight="10" orient="auto"><path class="pr-filled" d="M1,5 L8,1 L15,5 L8,9 Z"/></marker>
+  <marker id="pr6d7374-diamond" viewBox="0 0 16 10" refX="15" refY="5" markerWidth="16" markerHeight="10" orient="auto"><path d="M1,5 L8,1 L15,5 L8,9 Z"/></marker>
+  <marker id="pr6d7374-arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" orient="auto"><path class="pr-open" d="M1,1 L11,6 L1,11"/></marker>
+  <marker id="pr6d7374-tri-solid" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="11" markerHeight="11" orient="auto"><path class="pr-solid" d="M1,1 L11,6 L1,11 Z"/></marker>
 </defs>
-<g id="plantuml.preview" class="pr-container pr-classifier-namespace"><rect x="28" y="160" width="716" height="136"/><text class="pr-header" x="36" y="175">preview</text></g>
-<g id="plantuml" class="pr-container pr-classifier-namespace"><rect x="10" y="10" width="752" height="304"/><text class="pr-header" x="18" y="25">plantuml</text></g>
-<g id="plantuml.setup" class="pr-box pr-classifier-class"><rect x="28" y="50" width="124" height="78"/><text x="38" y="72">«function»</text><text class="pr-header" x="38" y="90">setup</text><line class="pr-sep" x1="28" y1="100" x2="152" y2="100"/><text x="38" y="112">+ setup(opts)</text></g>
-<g id="plantuml.plugin_root" class="pr-box pr-classifier-class"><rect x="200" y="50" width="140" height="78"/><text x="210" y="72">«function»</text><text class="pr-header" x="210" y="90">plugin_root</text><line class="pr-sep" x1="200" y1="100" x2="340" y2="100"/><text x="210" y="112">- plugin_root()</text></g>
-<g id="plantuml.preview.setup" class="pr-box pr-classifier-class"><rect x="46" y="200" width="100" height="78"/><text x="56" y="222">«function»</text><text class="pr-header" x="56" y="240">setup</text><line class="pr-sep" x1="46" y1="250" x2="146" y2="250"/><text x="56" y="262">+ setup()</text></g>
-<g id="plantuml.preview.start" class="pr-box pr-classifier-class"><rect x="194" y="200" width="164" height="78"/><text x="204" y="222">«function»</text><text class="pr-header" x="204" y="240">start</text><line class="pr-sep" x1="194" y1="250" x2="358" y2="250"/><text x="204" y="262">+ start(cmd, opts)</text></g>
-<g id="plantuml.preview.stop" class="pr-box pr-classifier-class"><rect x="406" y="200" width="100" height="78"/><text x="416" y="222">«function»</text><text class="pr-header" x="416" y="240">stop</text><line class="pr-sep" x1="406" y1="250" x2="506" y2="250"/><text x="416" y="262">+ stop()</text></g>
-<g id="plantuml.preview.browser_open" class="pr-box pr-classifier-class"><rect x="554" y="200" width="172" height="78"/><text x="564" y="222">«function»</text><text class="pr-header" x="564" y="240">browser_open</text><line class="pr-sep" x1="554" y1="250" x2="726" y2="250"/><text x="564" y="262">- browser_open(url)</text></g>
+<g id="pr6d7374-plantuml" data-id="plantuml" class="pr-container pr-classifier-namespace"><rect x="10" y="10" width="724" height="430" rx="6"/><text class="pr-header" x="20" y="25">plantuml</text></g>
+<g id="pr6d7374-plantuml.preview" data-id="plantuml.preview" class="pr-container pr-classifier-namespace"><rect x="28" y="168" width="360" height="254" rx="6"/><text class="pr-header" x="38" y="183">preview</text></g>
+<g id="pr6d7374-plantuml.setup" data-id="plantuml.setup" class="pr-box pr-classifier-class pr-stereotype-function"><rect x="28" y="50" width="136" height="78" rx="4"/><path class="pr-head" d="M32,50 H160 A4,4 0 0 1 164,54 V100 H28 V54 A4,4 0 0 1 32,50 Z"/><text class="pr-stereo" x="38" y="70">«function»</text><circle class="pr-badge" cx="45" cy="86" r="7"/><text class="pr-badge-text" x="45" y="89.5" text-anchor="middle">C</text><text class="pr-header" x="58" y="90">setup</text><line class="pr-sep" x1="28" y1="100" x2="164" y2="100"/><circle class="pr-vis pr-vis-public" cx="42" cy="108" r="3.5"/><text x="50" y="112"><tspan class="pr-name">setup</tspan><tspan class="pr-punct">(</tspan><tspan class="pr-param">opts</tspan><tspan class="pr-punct">)</tspan></text></g>
+<g id="pr6d7374-plantuml.plugin_root" data-id="plantuml.plugin_root" class="pr-box pr-classifier-class pr-stereotype-function"><rect x="204" y="50" width="152" height="78" rx="4"/><path class="pr-head" d="M208,50 H352 A4,4 0 0 1 356,54 V100 H204 V54 A4,4 0 0 1 208,50 Z"/><text class="pr-stereo" x="214" y="70">«function»</text><circle class="pr-badge" cx="221" cy="86" r="7"/><text class="pr-badge-text" x="221" y="89.5" text-anchor="middle">C</text><text class="pr-header" x="234" y="90">plugin_root</text><line class="pr-sep" x1="204" y1="100" x2="356" y2="100"/><circle class="pr-vis pr-vis-private" cx="218" cy="108" r="3.5"/><text x="226" y="112"><tspan class="pr-name">plugin_root</tspan><tspan class="pr-punct">(</tspan><tspan class="pr-punct">)</tspan></text></g>
+<g id="pr6d7374-plantuml.completion_engine" data-id="plantuml.completion_engine" class="pr-box pr-classifier-class pr-stereotype-function"><rect x="396" y="50" width="320" height="78" rx="4"/><path class="pr-head" d="M400,50 H712 A4,4 0 0 1 716,54 V100 H396 V54 A4,4 0 0 1 400,50 Z"/><text class="pr-stereo" x="406" y="70">«function»</text><circle class="pr-badge" cx="413" cy="86" r="7"/><text class="pr-badge-text" x="413" y="89.5" text-anchor="middle">C</text><text class="pr-header" x="426" y="90">completion_engine</text><line class="pr-sep" x1="396" y1="100" x2="716" y2="100"/><circle class="pr-vis pr-vis-public" cx="410" cy="108" r="3.5"/><text x="418" y="112"><tspan class="pr-name">completion_engine</tspan><tspan class="pr-punct">(</tspan><tspan class="pr-punct">)</tspan><tspan class="pr-punct"> : </tspan><tspan class="pr-type">string | nil</tspan></text></g>
+<g id="pr6d7374-plantuml.preview.setup" data-id="plantuml.preview.setup" class="pr-box pr-classifier-class pr-stereotype-function"><rect x="46" y="208" width="104" height="78" rx="4"/><path class="pr-head" d="M50,208 H146 A4,4 0 0 1 150,212 V258 H46 V212 A4,4 0 0 1 50,208 Z"/><text class="pr-stereo" x="56" y="228">«function»</text><circle class="pr-badge" cx="63" cy="244" r="7"/><text class="pr-badge-text" x="63" y="247.5" text-anchor="middle">C</text><text class="pr-header" x="76" y="248">setup</text><line class="pr-sep" x1="46" y1="258" x2="150" y2="258"/><circle class="pr-vis pr-vis-public" cx="60" cy="266" r="3.5"/><text x="68" y="270"><tspan class="pr-name">setup</tspan><tspan class="pr-punct">(</tspan><tspan class="pr-punct">)</tspan></text></g>
+<g id="pr6d7374-plantuml.preview.start" data-id="plantuml.preview.start" class="pr-box pr-classifier-class pr-stereotype-function"><rect x="190" y="208" width="176" height="78" rx="4"/><path class="pr-head" d="M194,208 H362 A4,4 0 0 1 366,212 V258 H190 V212 A4,4 0 0 1 194,208 Z"/><text class="pr-stereo" x="200" y="228">«function»</text><circle class="pr-badge" cx="207" cy="244" r="7"/><text class="pr-badge-text" x="207" y="247.5" text-anchor="middle">C</text><text class="pr-header" x="220" y="248">start</text><line class="pr-sep" x1="190" y1="258" x2="366" y2="258"/><circle class="pr-vis pr-vis-public" cx="204" cy="266" r="3.5"/><text x="212" y="270"><tspan class="pr-name">start</tspan><tspan class="pr-punct">(</tspan><tspan class="pr-param">cmd</tspan><tspan class="pr-punct">, </tspan><tspan class="pr-param">opts</tspan><tspan class="pr-punct">)</tspan></text></g>
+<g id="pr6d7374-plantuml.preview.stop" data-id="plantuml.preview.stop" class="pr-box pr-classifier-class pr-stereotype-function"><rect x="46" y="326" width="100" height="78" rx="4"/><path class="pr-head" d="M50,326 H142 A4,4 0 0 1 146,330 V376 H46 V330 A4,4 0 0 1 50,326 Z"/><text class="pr-stereo" x="56" y="346">«function»</text><circle class="pr-badge" cx="63" cy="362" r="7"/><text class="pr-badge-text" x="63" y="365.5" text-anchor="middle">C</text><text class="pr-header" x="76" y="366">stop</text><line class="pr-sep" x1="46" y1="376" x2="146" y2="376"/><circle class="pr-vis pr-vis-public" cx="60" cy="384" r="3.5"/><text x="68" y="388"><tspan class="pr-name">stop</tspan><tspan class="pr-punct">(</tspan><tspan class="pr-punct">)</tspan></text></g>
+<g id="pr6d7374-plantuml.preview.browser_open" data-id="plantuml.preview.browser_open" class="pr-box pr-classifier-class pr-stereotype-function"><rect x="186" y="326" width="184" height="78" rx="4"/><path class="pr-head" d="M190,326 H366 A4,4 0 0 1 370,330 V376 H186 V330 A4,4 0 0 1 190,326 Z"/><text class="pr-stereo" x="196" y="346">«function»</text><circle class="pr-badge" cx="203" cy="362" r="7"/><text class="pr-badge-text" x="203" y="365.5" text-anchor="middle">C</text><text class="pr-header" x="216" y="366">browser_open</text><line class="pr-sep" x1="186" y1="376" x2="370" y2="376"/><circle class="pr-vis pr-vis-private" cx="200" cy="384" r="3.5"/><text x="208" y="388"><tspan class="pr-name">browser_open</tspan><tspan class="pr-punct">(</tspan><tspan class="pr-param">url</tspan><tspan class="pr-punct">)</tspan></text></g>
 </svg>
