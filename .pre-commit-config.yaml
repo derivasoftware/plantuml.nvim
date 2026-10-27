@@ -1,7 +1,7 @@
 repos:
 
   - repo: https://github.com/derivasoftware/plantuml-fmt
-    rev: v0.3.2
+    rev: v0.5.0
     hooks:
       - id: plantuml-fmt
         # the cafetera fixtures carry deliberate defects and the suites
