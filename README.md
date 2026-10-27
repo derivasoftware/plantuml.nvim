@@ -64,13 +64,15 @@ the build step.
   your browser via `plantuml-render serve`: drag entities and
   namespaces, filter members/namespaces/notes, pan and zoom, reload on
   save. `:PlantumlPreviewStop` kills the server. Requires
-  `plantuml-render` ≥ 0.6 on PATH (npm).
+  `plantuml-render` on PATH: the standalone executable from its
+  [release](https://github.com/derivasoftware/plantuml-render/releases),
+  or the npm package.
 - **LSP**: parse diagnostics with exact ranges, semantic lints
   (unknown endpoints, duplicates, broken includes, participants no
-  class explains), completion, hover (participants show the card of
-  the class they play), references/rename across the workspace,
-  `gd` through `!include`/`!includesub`, `vim.lsp.buf.format` via
-  plantuml-fmt.
+  class or HLD box explains), completion, hover (participants show the
+  card of the class or box they play), references/rename across the
+  workspace, `gd` through `!include`/`!includesub`, entities and calls,
+  `vim.lsp.buf.format` via plantuml-fmt.
 
 ## Development
 
@@ -90,11 +92,15 @@ rebuilding; queries follow automatically.
 
 The family covers a standard-driven subset of PlantUML, never the whole
 language. Class diagrams: 125 of 149 standard constructs structural;
-sequence: 70 of 111, with the lifecycle verbs (activate, ref, box,
-delays) still raw; activity: actions and swimlanes structural, control
-flow raw. Everything else (deployment, components, state, mindmaps,
-gantt) parses lossless as raw lines, never an ERROR, but gets no
-structure. Highlighting and folding cover every diagram through
+sequence: participants, arrows, frames, notes and the lifecycle verbs
+(activate, create, destroy, return, ref, box, delays, spacers)
+structural, with autonumber, autoactivate and the styling surface raw;
+activity: actions, swimlanes and the whole new-syntax control flow
+structural, with the legacy syntax and the braced drawing blocks raw;
+state: declarations, descriptions and the composite block structural,
+with concurrent regions raw. Everything else (deployment, components,
+mindmaps, gantt) parses lossless as raw lines, never an ERROR, but gets
+no structure. Highlighting and folding cover every diagram through
 the raw tier; intelligence and preview follow the subsets above.
 
 ## Documentation

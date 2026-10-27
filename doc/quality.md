@@ -17,19 +17,19 @@ that reader exists.
 | Constraints | 0 |
 | Design diagrams | 4 |
 | Code classes | 0 |
-| Free functions | 6 |
-| Test cases | 51 |
+| Free functions | 7 |
+| Test cases | 66 |
 
 ### Metrics
 
 | Metric | Value |
 | --- | --- |
 | Source files | 2 |
-| Source lines | 178 |
+| Source lines | 208 |
 | Documentation files | 4 |
-| Documentation lines (authored) | 124 |
+| Documentation lines (authored) | 140 |
 | Tests executed (UT) | 9 |
-| Tests executed (ST) | 42 |
+| Tests executed (ST) | 44 |
 | UT line coverage | ? |
 | ST line coverage | ? |
 | argos diagnostics | 0 |
