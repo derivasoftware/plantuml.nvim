@@ -3,7 +3,7 @@
 # plugin never drifts from its grammar.
 
 GRAMMAR_URL ?= https://github.com/derivasoftware/tree-sitter-plantuml.git
-GRAMMAR_TAG ?= v0.15.3
+GRAMMAR_TAG ?= v0.16.0
 BUILD := build/tree-sitter-plantuml
 
 all: parser/plantuml.so queries/plantuml/highlights.scm

@@ -34,7 +34,7 @@ lazy.nvim:
 The language server (straight from git, or point `cmd` at a venv binary):
 
 ```bash
-pip install git+https://github.com/derivasoftware/plantuml-lsp.git@v0.8.1
+pip install git+https://github.com/derivasoftware/plantuml-lsp.git@v0.8.6
 ```
 
 ```lua
