@@ -8,7 +8,9 @@ Lua plugin, no venv. Verify with:
 
 ```bash
 make
-nvim --headless -u tests/minimal_init.lua -l tests/smoke.lua
+nvim --headless -u tests/minimal_init.lua -l tests/wiring.lua
+nvim --headless -u tests/minimal_init.lua -l tests/smoke_plantuml.lua
+nvim --headless -u tests/minimal_init.lua -l tests/smoke_preview.lua
 ```
 
 The grammar pin lives in the Makefile (`GRAMMAR_TAG`); queries are

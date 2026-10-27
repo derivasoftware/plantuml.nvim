@@ -33,6 +33,8 @@ smoke:
       "https://github.com/derivasoftware/"
     - make clean && make
     - nvim --headless -u tests/minimal_init.lua -l tests/wiring.lua
+    - nvim --headless -u tests/minimal_init.lua -l tests/smoke_plantuml.lua
+    - nvim --headless -u tests/minimal_init.lua -l tests/smoke_preview.lua
     # editor suite: real keys against the real language server
     # a fresh venv every run: the shell runner keeps .ci-tools between
     # jobs, and a server venv assembled months ago starts failing when
