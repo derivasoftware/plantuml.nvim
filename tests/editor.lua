@@ -250,6 +250,24 @@ check("completion tras flecha: participantes sin keywords",
   after_arrow["Molinillo"] ~= nil and after_arrow["note"] == nil,
   vim.inspect(vim.tbl_keys(after_arrow)))
 
+-- ── 3f. Native completion only without an engine (PUML-105) ─────────
+local function tab_mapped(buf)
+  for _, m in ipairs(vim.api.nvim_buf_get_keymap(buf, "i")) do
+    if m.lhs == "<Tab>" and m.expr == 1 then return true end
+  end
+  return false
+end
+check("native completion: on without an engine (Tab cycles the menu)",
+  require("plantuml").completion_engine() == nil and tab_mapped(seq_buf))
+package.loaded["blink.cmp"] = {}
+local engine_buf, engine_attached = open("clases/CL_Deposito.puml")
+check("native completion: an engine owns the menu and the keys",
+  engine_attached and require("plantuml").completion_engine() == "blink.cmp"
+    and not tab_mapped(engine_buf)
+    and vim.bo[engine_buf].omnifunc == "v:lua.vim.lsp.omnifunc")
+package.loaded["blink.cmp"] = nil
+vim.cmd.buffer(seq_buf)
+
 -- ── 4. Diagnosticos: los defectos intencionados, por severidad ──────
 local lints_buf = open("extra/LINTS_Demo.puml")
 local counted = vim.wait(8000, function()

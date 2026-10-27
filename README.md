@@ -41,6 +41,16 @@ pip install git+https://github.com/derivasoftware/plantuml-lsp.git@v0.8.6
 opts = { lsp = { cmd = { "/path/to/venv/bin/plantuml-lsp" } } }
 ```
 
+Completion: with no completion engine installed, the plugin turns on
+Neovim's built-in LSP completion with autotrigger, and Tab/S-Tab cycle and
+Enter accepts while the menu is open. When blink.cmp, nvim-cmp or
+mini.completion is present, the engine owns the menu and the keys and the
+plugin stays out of the way. Force it either way:
+
+```lua
+opts = { lsp = { native_completion = false } } -- "auto" (default) | true | false
+```
+
 Requires Neovim ≥ 0.11 (native `vim.lsp.config`) and a C compiler for
 the build step.
 

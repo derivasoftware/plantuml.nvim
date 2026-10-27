@@ -13,8 +13,13 @@ M.defaults = {
     enabled = true,
     -- resolved through PATH; point it at a venv binary if you prefer
     cmd = { "plantuml-lsp" },
-    -- Tab/S-Tab cycle and Enter accepts while the menu is open;
-    -- outside the menu the keys keep their normal meaning
+    -- Neovim's built-in LSP completion with autotrigger: "auto" turns it on
+    -- only when no completion engine (blink.cmp, nvim-cmp, mini.completion)
+    -- is loaded or installed, so two menus never compete; true or false
+    -- force it either way
+    native_completion = "auto",
+    -- with native completion, Tab/S-Tab cycle and Enter accepts while the
+    -- menu is open; outside the menu the keys keep their normal meaning
     pum_keys = true,
   },
   folds = true,
@@ -24,6 +29,24 @@ M.defaults = {
     cmd = { "plantuml-render" },
   },
 }
+
+-- Completion engines that own the menu and the keys when present.
+local ENGINES = { "blink.cmp", "cmp", "mini.completion" }
+
+--- The completion engine loaded or on the runtimepath, or nil.
+function M.completion_engine()
+  for _, name in ipairs(ENGINES) do
+    if package.loaded[name] ~= nil then
+      return name
+    end
+    local path = "lua/" .. name:gsub("%.", "/")
+    if #vim.api.nvim_get_runtime_file(path .. "/init.lua", false) > 0
+        or #vim.api.nvim_get_runtime_file(path .. ".lua", false) > 0 then
+      return name
+    end
+  end
+  return nil
+end
 
 local function plugin_root()
   local source = debug.getinfo(1, "S").source:sub(2)
@@ -70,16 +93,23 @@ function M.setup(opts)
 
     -- native autocompletion: without a completion plugin, nothing pops
     -- unless we enable the 0.11 built-in with autotrigger (fires on
-    -- the server's trigger characters: ':', '>', ' ', '|')
+    -- the server's trigger characters: ':', '>', ' ', '|'); with an engine
+    -- present the engine owns the menu and the keys (PUML-105)
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("plantuml_lsp_completion", {}),
       callback = function(event)
         local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client and client.name == "plantuml_lsp"
-            and vim.lsp.completion ~= nil then
+        if not (client and client.name == "plantuml_lsp") then
+          return
+        end
+        vim.bo[event.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+        local native = opts.lsp.native_completion
+        if native == "auto" then
+          native = M.completion_engine() == nil
+        end
+        if native and vim.lsp.completion ~= nil then
           vim.lsp.completion.enable(true, client.id, event.buf,
             { autotrigger = true })
-          vim.bo[event.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
           vim.api.nvim_set_option_value("completeopt",
             "menu,menuone,noselect,popup", { buf = event.buf })
           if opts.lsp.pum_keys then
