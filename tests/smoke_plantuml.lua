@@ -1,4 +1,4 @@
--- covers: plantuml.setup, plantuml.plugin_root
+-- covers: plantuml.setup, plantuml.plugin_root, plantuml.completion_engine
 -- Headless unit suite for setup(): the filetype, the autocommands, the
 -- preview commands and the language server configuration.
 -- Run: nvim --headless -u tests/minimal_init.lua -l tests/smoke_plantuml.lua
@@ -43,6 +43,13 @@ vim.cmd.edit(path)
 local has_parser = vim.fn.filereadable(suite_root .. "/parser/plantuml.so") == 1
 check("the FileType callback starts highlighting only with the plugin's parser",
   (vim.treesitter.highlighter.active[vim.api.nvim_get_current_buf()] ~= nil) == has_parser)
+
+-- completion_engine: none on the bare harness, the loaded one otherwise
+local plantuml = require("plantuml")
+check("completion_engine: none without an engine", plantuml.completion_engine() == nil)
+package.loaded["cmp"] = {}
+check("completion_engine: names a loaded engine", plantuml.completion_engine() == "cmp")
+package.loaded["cmp"] = nil
 
 junit.write(suite_root .. "/test-results/junit-smoke-plantuml.xml", "tests/smoke_plantuml.lua")
 if #failed > 0 then

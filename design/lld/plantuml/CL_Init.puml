@@ -11,6 +11,9 @@ namespace plantuml {
   class plugin_root <<function>> {
     - plugin_root()
   }
+  class completion_engine <<function>> {
+    + completion_engine() : string | nil
+  }
 }
 
 !endsub
