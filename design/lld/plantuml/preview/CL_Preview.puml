@@ -5,7 +5,7 @@
 
 namespace plantuml.preview {
   class setup <<function>> {
-    + setup()
+    + setup(opts)
   }
   class start <<function>> {
     + start(cmd, opts)
@@ -14,7 +14,7 @@ namespace plantuml.preview {
     + stop()
   }
   class browser_open <<function>> {
-    - browser_open(url)
+    - browser_open(target)
   }
 }
 
