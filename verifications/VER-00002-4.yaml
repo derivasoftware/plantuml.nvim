@@ -62,4 +62,4 @@ verification:
     - "tests/editor.lua::rename: secuencia renombrada"
     - "tests/editor.lua::native completion: on without an engine (Tab cycles the menu)"
     - "tests/editor.lua::native completion: an engine owns the menu and the keys"
-  status: DRAFT
+  status: APPROVED
