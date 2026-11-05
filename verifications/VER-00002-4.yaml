@@ -1,5 +1,5 @@
 verification:
-  id: VER-00002-3
+  id: VER-00002-4
   req_id: REQ-00002-1
   title: The smoke proves the editor wiring; the integration suite proves the server end to end
   description: >
@@ -13,6 +13,8 @@ verification:
     one back to this verification.
     Native completion and its menu keys turn on only without a completion
     engine; with blink.cmp present the engine owns the menu (PUML-105).
+    Revision 4 signs the native-completion cases and their sentence, added
+    in place under revision 3 (PUML-105, PUML-122).
   method: test
   test_ids:
     - "tests/wiring.lua::filetype"
